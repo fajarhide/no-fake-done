@@ -57,6 +57,23 @@ The menu animation feels slow, check it
 
 `no-fake-done` is the way in for any change. When the change touches a screen, it builds with `no-template-ui` and checks with `no-broken-ui`. Run `no-janky-motion` when the page animates.
 
+### When each one runs
+
+Your agent reads every skill's description at the start of a session and loads the one that fits the task, so you do not have to name it.
+
+| You say something like | It loads |
+| --- | --- |
+| "add a feature", "fix this bug", "open the PR", "I need it today" | `no-fake-done` |
+| "build a landing page", "this looks AI generated" | `no-template-ui` |
+| "audit this page", "why does this checkout feel off", "review my dashboard" | `no-broken-ui` |
+| "the menu animation feels slow", "this page is janky" | `no-janky-motion` |
+
+Choosing a skill from its description is the model's call, so now and then it will skip one that fits. To make it reliable, name the skill in your request ("use no-broken-ui to audit this page"), or add a line to the project's `CLAUDE.md` or `AGENTS.md`:
+
+```md
+Use no-fake-done for every change that ends in a commit or PR.
+```
+
 ## no-fake-done
 
 Without it, agents in our runs kept the plan in their heads, picked a bigger design than "I need it today" called for without saying so, never specified the empty, failure, phone or keyboard states, and shipped an unrequested refactor in the same PR. One said "done" about a button nobody had opened in a browser. The skill puts a spec on disk with a receipt named for every acceptance row, and builds the PR from that table.
