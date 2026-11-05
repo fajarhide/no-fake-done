@@ -1,8 +1,8 @@
 ---
-name: ui-direction
+name: no-template-ui
 description: Use when building a new web page or giving one a look of its own, when a page reads as templated, generic or AI-made, or when writing a DESIGN.md.
 ---
-# UI direction
+# no-template-ui
 
 Use this when building a new page, or when asked to make one look better and the project has no design system that already decides. 
 

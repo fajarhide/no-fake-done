@@ -1,15 +1,15 @@
 # fajarhide/skills
 
-Skills that make your coding agent show its receipts.
+Stop your AI agent saying done when it isn't.
 
 An agent says "done" about a button nobody clicked, a page that renders blank, a PR whose tests pass while the screen is broken. You find out in the demo. With these four skills every claim carries a receipt: a test, a number measured in a real browser, a screenshot, or a step you can repeat. Anything the agent could not check is written down as Not verified. They sit on top of whatever process you already use. They are for web work, from a one-line request to a PR.
 
 | Skill | Use it when | You get back | skills.sh |
 | --- | --- | --- | --- |
-| [`dev-receipts`](skills/dev-receipts/README.md) | You are building a feature or fixing a bug, from a one-line request to a PR | A spec on disk, the change, and a PR whose every acceptance row has its receipt | [![dev-receipts installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fdev-receipts&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/dev-receipts) |
-| [`ui-direction`](skills/ui-direction/README.md) | You are building a new page or a page looks generic | The page, plus a `DESIGN.md` that records why it looks the way it does | [![ui-direction installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fui-direction&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/ui-direction) |
-| [`ui-receipts`](skills/ui-receipts/README.md) | A page exists and you want to know what is wrong with it | Up to ten ranked findings, each with the action, number or labelled judgment behind it | [![ui-receipts installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fui-receipts&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/ui-receipts) |
-| [`motion-receipts`](skills/motion-receipts/README.md) | A page animates and you want to know whether it should, and whether it holds up | Animations measured in four browser runs, and up to ten findings with their numbers | [![motion-receipts installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fmotion-receipts&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/motion-receipts) |
+| [`no-fake-done`](skills/no-fake-done/README.md) | You are building a feature or fixing a bug, from a one-line request to a PR | A spec on disk, the change, and a PR whose every acceptance row has its receipt | [![no-fake-done installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fno-fake-done&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/no-fake-done) |
+| [`no-template-ui`](skills/no-template-ui/README.md) | You are building a new page or a page looks generic | The page, plus a `DESIGN.md` that records why it looks the way it does | [![no-template-ui installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fno-template-ui&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/no-template-ui) |
+| [`no-broken-ui`](skills/no-broken-ui/README.md) | A page exists and you want to know what is wrong with it | Up to ten ranked findings, each with the action, number or labelled judgment behind it | [![no-broken-ui installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fno-broken-ui&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/no-broken-ui) |
+| [`no-janky-motion`](skills/no-janky-motion/README.md) | A page animates and you want to know whether it should, and whether it holds up | Animations measured in four browser runs, and up to ten findings with their numbers | [![no-janky-motion installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fno-janky-motion&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/no-janky-motion) |
 
 ## The receipts method
 
@@ -27,16 +27,18 @@ Every skill here follows the same four rules.
 npx skills add fajarhide/skills -g
 
 # Or one of them
-npx skills add fajarhide/skills --skill ui-direction -g
-npx skills add fajarhide/skills --skill ui-receipts -g
-npx skills add fajarhide/skills --skill dev-receipts -g
-npx skills add fajarhide/skills --skill motion-receipts -g
+npx skills add fajarhide/skills --skill no-template-ui -g
+npx skills add fajarhide/skills --skill no-broken-ui -g
+npx skills add fajarhide/skills --skill no-fake-done -g
+npx skills add fajarhide/skills --skill no-janky-motion -g
 
 # The skills measure pages in a browser
 pip install playwright && playwright install chromium
 ```
 
 Without `-g`, a skill lands inside whichever project you ran the command from.
+
+The skills were renamed on 2026-11-06 so each name says the problem it stops: `dev-receipts` is now `no-fake-done`, `ui-direction` is `no-template-ui`, `ui-receipts` is `no-broken-ui` and `motion-receipts` is `no-janky-motion`. An install under an old name keeps working but no longer updates, so remove it and add the new one.
 
 The install counts are read live from each skill's skills.sh page. A skill shows a dash until its first counted install, and skills.sh only counts installs made through the CLI.
 
@@ -53,9 +55,9 @@ Add shift swapping to the rota screen, I need it today
 The menu animation feels slow, check it
 ```
 
-`dev-receipts` is the way in for any change. When the change touches a screen, it builds with `ui-direction` and checks with `ui-receipts`. Run `motion-receipts` when the page animates.
+`no-fake-done` is the way in for any change. When the change touches a screen, it builds with `no-template-ui` and checks with `no-broken-ui`. Run `no-janky-motion` when the page animates.
 
-## dev-receipts
+## no-fake-done
 
 Without it, agents in our runs kept the plan in their heads, picked a bigger design than "I need it today" called for without saying so, never specified the empty, failure, phone or keyboard states, and shipped an unrequested refactor in the same PR. One said "done" about a button nobody had opened in a browser. The skill puts a spec on disk with a receipt named for every acceptance row, and builds the PR from that table.
 
@@ -63,12 +65,12 @@ The same brief built with and without the skills, with every screenshot taken by
 
 | Without the skills | With them |
 | --- | --- |
-| <img src="assets/dev-receipts/before-desktop-swap.png" width="400" alt="Dialog listing colleague shifts, a locked one still selectable"> | <img src="assets/dev-receipts/after-desktop-swap.png" width="400" alt="Unworkable shifts greyed out, each with its reason"> |
-| <img src="assets/dev-receipts/before-desktop-fail.png" width="400" alt="The shift is locked and cannot be swapped"> | <img src="assets/dev-receipts/after-desktop-fail.png" width="400" alt="Locked after the page loaded, nothing changed, your shift is still selected"> |
+| <img src="assets/no-fake-done/before-desktop-swap.png" width="400" alt="Dialog listing colleague shifts, a locked one still selectable"> | <img src="assets/no-fake-done/after-desktop-swap.png" width="400" alt="Unworkable shifts greyed out, each with its reason"> |
+| <img src="assets/no-fake-done/before-desktop-fail.png" width="400" alt="The shift is locked and cannot be swapped"> | <img src="assets/no-fake-done/after-desktop-fail.png" width="400" alt="Locked after the page loaded, nothing changed, your shift is still selected"> |
 
-On a real repo, four runs with the skill all wrote a spec and a PR with receipts, and none of three runs without it did. Two runs with it also rewrote code nobody asked about, and one shipped a blank page. [All seven runs, and the limits](skills/dev-receipts/README.md).
+On a real repo, four runs with the skill all wrote a spec and a PR with receipts, and none of three runs without it did. Two runs with it also rewrote code nobody asked about, and one shipped a blank page. [All seven runs, and the limits](skills/no-fake-done/README.md).
 
-## ui-direction
+## no-template-ui
 
 Asked for a coffee site, agents produce cream, terracotta and a serif. This skill has the agent list what only this subject has, name seven worlds its audience knows by heart, and roll a die, because a model left to choose picks the safest one.
 
@@ -76,37 +78,37 @@ Screens people work in skip the die. The first line names what needs doing now, 
 
 Final test round, scored from anonymous screenshots:
 
-| Mean over 4 judgments | ui-direction | A popular design skill | No skill |
+| Mean over 4 judgments | no-template-ui | A popular design skill | No skill |
 | --- | --- | --- | --- |
 | Overall score, of 10 | **8.32** | 7.55 | 5.60 |
 | Marked as generic AI output | **0 of 4** | **0 of 4** | 4 of 4 |
 | Tokens per build | 93k | 132k | **70k** |
 
-Nearly the same text scored 6.50 when it lived inside `ui-receipts`, and we cannot say why it moved. The sample is four briefs, and the judges were models. [Every round and its limits](skills/ui-direction/README.md#how-it-was-measured).
+Nearly the same text scored 6.50 when it lived inside `no-broken-ui`, and we cannot say why it moved. The sample is four briefs, and the judges were models. [Every round and its limits](skills/no-template-ui/README.md#how-it-was-measured).
 
-## ui-receipts
+## no-broken-ui
 
 Most agents review UI by reading code, and guess at how the page behaves. This skill has the agent drive the page and force what a happy path never shows: double submits, failed requests, empty states, long text, reloads and keyboard use.
 
 Test site with 18 seeded defects and 4 decoys, things that look wrong but are fine:
 
-| Mean per run | ui-receipts (9 runs) | No skill (6 runs) |
+| Mean per run | no-broken-ui (9 runs) | No skill (6 runs) |
 | --- | --- | --- |
 | Defects found, of 18 | **13.9** (range 9 to 17) | 10.3 (range 7 to 13) |
 | Decoys reported as defects, of 4 | **0.3** | 3.2 |
 | Factual claims the source contradicts | **1.1** | 2.3 |
 
-Runs vary a lot, so run it twice on anything important. The author wrote the test site and its answer key. [Before and after screenshots and the full results](skills/ui-receipts/README.md).
+Runs vary a lot, so run it twice on anything important. The author wrote the test site and its answer key. [Before and after screenshots and the full results](skills/no-broken-ui/README.md).
 
-## motion-receipts
+## no-janky-motion
 
-Reads the motion the browser runs, with `document.getAnimations()` polled every frame, in four runs: normal, reduced motion, JavaScript off and CPU slowed 4x. A test page with seven planted problems and one control catches all seven and leaves the control alone. It has not been measured against agents working without it. [Details](skills/motion-receipts/README.md).
+Reads the motion the browser runs, with `document.getAnimations()` polled every frame, in four runs: normal, reduced motion, JavaScript off and CPU slowed 4x. A test page with seven planted problems and one control catches all seven and leaves the control alone. It has not been measured against agents working without it. [Details](skills/no-janky-motion/README.md).
 
 ## Why separate skills
 
-They began as one. With the build instructions inside the audit skill, a blind audit fell from 12.0 to 10.3 defects found, in three runs each. Splitting them keeps the audit as it was and loads the build instructions only when you are building. `dev-receipts` follows the same rule: it names the other skills at the step that needs them and does not copy their text.
+They began as one. With the build instructions inside the audit skill, a blind audit fell from 12.0 to 10.3 defects found, in three runs each. Splitting them keeps the audit as it was and loads the build instructions only when you are building. `no-fake-done` follows the same rule: it names the other skills at the step that needs them and does not copy their text.
 
-The scores above for `ui-direction` and `ui-receipts` were measured before a few lines were added to each on 2026-11-05: worst real values, environment cases and a first look in the audit, and a copy recipe, browser surfaces and a motion budget in the build. The same day, `ui-direction` replaced its screen modes with four types named by the receipt that proves each screen worked. None of this has been measured yet.
+The scores above for `no-template-ui` and `no-broken-ui` were measured before a few lines were added to each on 2026-11-05: worst real values, environment cases and a first look in the audit, and a copy recipe, browser surfaces and a motion budget in the build. The same day, `no-template-ui` replaced its screen modes with four types named by the receipt that proves each screen worked. None of this has been measured yet.
 
 ## Licence
 

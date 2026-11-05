@@ -1,11 +1,13 @@
-# ui-receipts
+# no-broken-ui
+
+The screenshot looks finished. Then a customer double-clicks Pay and is charged twice, a failed signup wipes everything they typed, and on a phone the table pushes the whole page sideways. None of that shows in a diff, so an agent that only reads code never sees it.
+
+`no-broken-ui` makes the agent use the page the way people do, force what the happy path hides, and report only what it saw happen.
 
 A UI and UX audit skill for AI coding agents. The agent opens your app in a real browser, tries to break it, and reports what it found. Every finding carries a receipt: the action it performed, a number it measured, or a judgment labelled as one.
 
-Most agents review UI by reading code, and guess at how the page behaves. A signup form that wipes itself after a failed submit looks fine in a diff.
-
 ```sh
-npx skills add fajarhide/skills --skill ui-receipts -g
+npx skills add fajarhide/skills --skill no-broken-ui -g
 pip install playwright && playwright install chromium
 ```
 
@@ -47,7 +49,7 @@ Bad email, then submit. The message vanishes, and everything typed is gone.
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/signup-failed-before.png" width="340" alt="Empty form with a vague error"> | <img src="../../assets/ui-receipts/signup-failed-after.png" width="340" alt="Input kept, error beside the field"> |
+| <img src="../../assets/no-broken-ui/signup-failed-before.png" width="340" alt="Empty form with a vague error"> | <img src="../../assets/no-broken-ui/signup-failed-after.png" width="340" alt="Input kept, error beside the field"> |
 
 ### A button that looks broken
 
@@ -55,7 +57,7 @@ Bad email, then submit. The message vanishes, and everything typed is gone.
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/signup-waiting-before.png" width="340" alt="Button unchanged"> | <img src="../../assets/ui-receipts/signup-waiting-after.png" width="340" alt="Button disabled, saying Creating account"> |
+| <img src="../../assets/no-broken-ui/signup-waiting-before.png" width="340" alt="Button unchanged"> | <img src="../../assets/no-broken-ui/signup-waiting-after.png" width="340" alt="Button disabled, saying Creating account"> |
 
 ### Charged twice
 
@@ -63,7 +65,7 @@ Double-click on Pay. Also note the total: the before says Rp 95.000 and charges 
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/checkout-double-before.png" width="340" alt="Two paid orders"> | <img src="../../assets/ui-receipts/checkout-double-after.png" width="340" alt="One paid order, full total shown"> |
+| <img src="../../assets/no-broken-ui/checkout-double-before.png" width="340" alt="Two paid orders"> | <img src="../../assets/no-broken-ui/checkout-double-after.png" width="340" alt="One paid order, full total shown"> |
 
 ### A declined card
 
@@ -71,7 +73,7 @@ The address and phone should survive a problem with the card.
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/checkout-declined-before.png" width="340" alt="Form wiped, Payment failed"> | <img src="../../assets/ui-receipts/checkout-declined-after.png" width="340" alt="Details kept, error says what to do"> |
+| <img src="../../assets/no-broken-ui/checkout-declined-before.png" width="340" alt="Form wiped, Payment failed"> | <img src="../../assets/no-broken-ui/checkout-declined-after.png" width="340" alt="Details kept, error says what to do"> |
 
 ### A table on a phone
 
@@ -79,7 +81,7 @@ Measured page width: 1000 px on a 390 px screen before, no page overflow after. 
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/dash-mobile-before.png" width="340" alt="Page overflows sideways"> | <img src="../../assets/ui-receipts/dash-mobile-after.png" width="340" alt="Table scrolls in its own container"> |
+| <img src="../../assets/no-broken-ui/dash-mobile-before.png" width="340" alt="Page overflows sideways"> | <img src="../../assets/no-broken-ui/dash-mobile-after.png" width="340" alt="Table scrolls in its own container"> |
 
 ### Filtering to nothing
 
@@ -87,7 +89,7 @@ The before also still says "4 invoices".
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/dash-empty-before.png" width="440" alt="Empty table"> | <img src="../../assets/ui-receipts/dash-empty-after.png" width="440" alt="Message with a clear filter button"> |
+| <img src="../../assets/no-broken-ui/dash-empty-before.png" width="440" alt="Empty table"> | <img src="../../assets/no-broken-ui/dash-empty-after.png" width="440" alt="Message with a clear filter button"> |
 
 ### One click from deleting
 
@@ -95,7 +97,7 @@ Taken right after clicking Delete on the first row. In the before, the row is al
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/dash-delete-before.png" width="440" alt="Row removed at once"> | <img src="../../assets/ui-receipts/dash-delete-after.png" width="440" alt="Confirm naming the invoice"> |
+| <img src="../../assets/no-broken-ui/dash-delete-before.png" width="440" alt="Row removed at once"> | <img src="../../assets/no-broken-ui/dash-delete-after.png" width="440" alt="Confirm naming the invoice"> |
 
 ### A dialog off the screen
 
@@ -103,7 +105,7 @@ Measured page width: 668 px on a 390 px screen before, no page overflow after. T
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/settings-dialog-before.png" width="340" alt="Dialog cut off"> | <img src="../../assets/ui-receipts/settings-dialog-after.png" width="340" alt="Dialog fits"> |
+| <img src="../../assets/no-broken-ui/settings-dialog-before.png" width="340" alt="Dialog cut off"> | <img src="../../assets/no-broken-ui/settings-dialog-after.png" width="340" alt="Dialog fits"> |
 
 ### A call to action you can barely read
 
@@ -111,13 +113,13 @@ Measured contrast: 2.55 before, against the 4.5 required. The probe reports no f
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/contrast-before.png" width="340" alt="Pale green link"> | <img src="../../assets/ui-receipts/contrast-after.png" width="340" alt="Dark green link"> |
+| <img src="../../assets/no-broken-ui/contrast-before.png" width="340" alt="Pale green link"> | <img src="../../assets/no-broken-ui/contrast-after.png" width="340" alt="Dark green link"> |
 
 ### Docs that fight the phone
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/docs-mobile-before.png" width="340" alt="Sidebar crushes the text"> | <img src="../../assets/ui-receipts/docs-mobile-after.png" width="340" alt="Sidebar stacks above the text"> |
+| <img src="../../assets/no-broken-ui/docs-mobile-before.png" width="340" alt="Sidebar crushes the text"> | <img src="../../assets/no-broken-ui/docs-mobile-after.png" width="340" alt="Sidebar stacks above the text"> |
 
 ### A link that hides its own heading
 
@@ -125,7 +127,7 @@ Click "Storing". In the before, the heading lands under the sticky header.
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/docs-anchor-before.png" width="440" alt="Heading hidden"> | <img src="../../assets/ui-receipts/docs-anchor-after.png" width="440" alt="Heading visible"> |
+| <img src="../../assets/no-broken-ui/docs-anchor-before.png" width="440" alt="Heading hidden"> | <img src="../../assets/no-broken-ui/docs-anchor-after.png" width="440" alt="Heading visible"> |
 
 ### The generic AI look
 
@@ -133,7 +135,7 @@ The skill asks whether the page could belong to any other product if the logo we
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/landing-before.png" width="440" alt="Purple gradient, Supercharge your productivity"> | <img src="../../assets/ui-receipts/landing-after.png" width="440" alt="A concrete promise and an example of the output"> |
+| <img src="../../assets/no-broken-ui/landing-before.png" width="440" alt="Purple gradient, Supercharge your productivity"> | <img src="../../assets/no-broken-ui/landing-after.png" width="440" alt="A concrete promise and an example of the output"> |
 
 ### On a real product
 
@@ -141,7 +143,7 @@ An update button in [Nakama](https://github.com/ahmadrosid/nakama), 0.5 seconds 
 
 | Before | After |
 | --- | --- |
-| <img src="../../assets/ui-receipts/real-before.png" width="440" alt="Button unchanged after the click"> | <img src="../../assets/ui-receipts/real-after.png" width="440" alt="Starting, with a spinner"> |
+| <img src="../../assets/no-broken-ui/real-before.png" width="440" alt="Button unchanged after the click"> | <img src="../../assets/no-broken-ui/real-after.png" width="440" alt="Starting, with a spinner"> |
 
 ## More things to ask it
 

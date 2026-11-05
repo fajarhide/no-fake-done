@@ -94,7 +94,7 @@ HIDDEN_AT_REST = r"""
 
 
 def launch(p):
-    """Same order as ui-receipts: default browser, then an installed Chrome or Edge."""
+    """Same order as no-broken-ui: default browser, then an installed Chrome or Edge."""
     error = None
     for options in ({}, {"channel": "chrome"}, {"channel": "msedge"}):
         try:
