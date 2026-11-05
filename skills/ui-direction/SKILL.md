@@ -8,18 +8,20 @@ Use this when building a new page, or when asked to make one look better and the
 
 Models reach for the category default: asked for a coffee site, they produce cream, terracotta and a serif. This pass makes each visual decision answer to something true about this subject.
 
-## 1. Name the mode
+## 1. Name the receipt
 
-Pick from the surface, not the company. A tool's landing page is Persuade, and its settings screen is Operate.
+Decide what would prove this screen did its job. Judge the surface, not the company: a tool's landing page and its settings screen get different receipts.
 
-| Mode | Success is | Ambition shows as |
+| The screen has worked when | Call it | Spend the ambition on |
 | --- | --- | --- |
-| Persuade | The visitor decides and acts | A clear idea, scale, one dominant thing per screen |
-| Operate | The person finishes a task | Density, scanability, familiar patterns, exact states |
-| Read | The reader understands | Structure, line length, navigation |
-| Experience | The visitor is inside the work | The work leads and the interface recedes |
+| A stranger takes the main action within five seconds | Pitch | One idea at full scale, one dominant thing per screen |
+| Someone finishes the next task without help | Desk | Density, scanability, familiar controls, every state exact |
+| A reader finds the answer and leaves | Page | Structure, line length, knowing where they are |
+| The visitor remembers the work, not the frame | Show | The work fills the screen and the interface steps back |
 
-For Operate, skip steps 3 and 4 and use the work itself as the idea:
+Write the receipt in one line before anything else, such as "a nurse covers tonight's gap in two taps". Step 7 checks the page against it.
+
+For a Desk screen, skip steps 3 and 4 and use the work itself as the idea:
 
 - The first line on the screen names what needs doing now, with the count and a button for the next action. "3 shifts have no vet. Fill the next one."
 - Sample data puts the hard cases in the first view: gaps, conflicts, overdue items. A screen that opens on "all clear" shows nothing of the job.
@@ -91,11 +93,17 @@ If `npx` is available, validate it with `npx @google/design.md lint DESIGN.md`.
 
 ## 6. Build in this order
 
-1. The words, complete: every section delivers its real content. List each section as a claim with its proof, and delete a section that has no claim.
-2. Tokens from DESIGN.md, then the first screen at phone and desktop width. It demonstrates the world and the mechanism, and its title says plainly what this is.
+1. The words, complete: every section delivers its real content. List each section as a claim with its proof, and delete a section that has no claim. Write each piece to this shape:
+   - **Headline:** what this is and who it is for, in the subject's own nouns. If a competitor's name fits in it, rewrite it.
+   - **Button:** the verb and its object, such as "Swap Fri 6 Nov". The toast and the confirmation reuse that verb ("Swapped").
+   - **Error:** what happened, what was kept, what to do next. "Lina's shift was locked after this page loaded. Your pick is kept. Choose another."
+   - **Empty state:** why it is empty and the one action that fills it.
+   - **Numbers, quotes and logos:** real ones, or none. Sample content is listed for the owner to confirm.
+   - **Sentences:** one idea each, in the words the audience uses at work. Read every line aloud before shipping and rewrite any that sounds like an ad or an assistant: a contrast staged as "not X, but Y", three items where the content has two, a dash used for rhythm, a one-line closer that restates the section, praise words with no fact behind them (seamless, powerful, effortless, revolutionary), and a bold label in front of every line of body copy.
+2. Tokens from DESIGN.md, then the first screen at phone and desktop width. It demonstrates the world and the mechanism, and its title says plainly what this is. For a Pitch screen, the headline, one sentence and the primary action fit in 1280 by 800 without scrolling. Theme `::selection`, `caret-color`, the scrollbar and `:focus-visible` from the palette, since browser defaults show through.
 3. Each section, carrying the idea through pricing, FAQ and footer. Neighbours differ in layout.
 4. Space left by removing ornament goes to scale, content or a real picture, never to another ornament.
-5. Motion last, and only where it explains something. The page must work without it.
+5. Motion last, and only where it explains something. The page must work without it and stop under `prefers-reduced-motion`. No `transition: all`, no animating width, height, top or left, interface transitions under 300 ms, and nothing grows from `scale(0)`. Grep the CSS to check.
 
 ## 7. Prove it
 
@@ -105,6 +113,7 @@ python scripts/probe.py OUT_DIR URL --design DESIGN.md
 
 Open every screenshot and judge the pictures, not your code:
 
+- **The receipt from step 1:** walk it on the phone screenshot. If it fails, nothing below matters yet.
 - **One second:** what did you see? "A website" means there is no focal point.
 - **Five seconds:** what is this, who is it for, what do I do next?
 - **Cover the name:** could a competitor use this page unchanged?
