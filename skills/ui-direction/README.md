@@ -52,6 +52,20 @@ Read these with the following in mind:
 - **The other skill ran with a handicap.** It could not ask questions or start the helper agents it uses to review its work, so its full process may do better.
 - **The author wrote the briefs, the rubric and this skill.** The judges are models, not people, and they saw screenshots only, so these scores do not test whether forms work.
 
+## The copy recipe
+
+Added on 2026-11-05, after the rounds above. Each headline, button, error and empty state is written to a set shape, and every sentence is read aloud and rewritten if it sounds like an ad or an assistant. A small check: one brief (a booking page for a bicycle repair shop), one model, three runs with the recipe and three without.
+
+| | Without | With the recipe |
+| --- | --- | --- |
+| Error says what was kept | 1 of 3 | 3 of 3 |
+| Error opens with "Sorry" | 2 of 3 | 0 of 3 |
+| Button names the specific thing ("Book Sat 7 Nov, 10:00") | 0 of 3 | 3 of 3 |
+| Made-up claim or closing flourish left unmarked ("Book it in 30 seconds") | 3 of 3 | 0 of 3 |
+| Dashes | 0 | 0 |
+
+The fourth row favours the recipe, since only those runs were asked to list what they made up. Dashes and a repeated verb in the toast were already right without it. Six short runs on one brief are a lead to test on more briefs before anyone quotes them.
+
 ## What it will not do
 
 - It does not make the page right for your business. Whether it looks better is your call, so it shows you the screenshots.

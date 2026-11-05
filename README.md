@@ -1,23 +1,38 @@
 # fajarhide/skills
 
-Skills for AI coding agents that work on web interfaces. One builds a page with a look of its own, and the other opens a page in a real browser and tries to break it. Both were tested with blind evals, and each README publishes the rounds it lost as well as the ones it won.
+Skills that make your coding agent show its receipts.
+
+An agent says "done" about a button nobody clicked, a page that renders blank, a PR whose tests pass while the screen is broken. You find out in the demo. With these four skills every claim carries a receipt: a test, a number measured in a real browser, a screenshot, or a step you can repeat. Anything the agent could not check is written down as Not verified. They sit on top of whatever process you already use. They are for web work, from a one-line request to a PR.
 
 | Skill | Use it when | You get back | skills.sh |
 | --- | --- | --- | --- |
+| [`dev-receipts`](skills/dev-receipts/README.md) | You are building a feature or fixing a bug, from a one-line request to a PR | A spec on disk, the change, and a PR whose every acceptance row has its receipt | [![dev-receipts installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fdev-receipts&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/dev-receipts) |
 | [`ui-direction`](skills/ui-direction/README.md) | You are building a new page or a page looks generic | The page, plus a `DESIGN.md` that records why it looks the way it does | [![ui-direction installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fui-direction&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/ui-direction) |
 | [`ui-receipts`](skills/ui-receipts/README.md) | A page exists and you want to know what is wrong with it | Up to ten ranked findings, each with the action, number or labelled judgment behind it | [![ui-receipts installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fui-receipts&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/ui-receipts) |
+| [`motion-receipts`](skills/motion-receipts/README.md) | A page animates and you want to know whether it should, and whether it holds up | Animations measured in four browser runs, and up to ten findings with their numbers | [![motion-receipts installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fmotion-receipts&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/motion-receipts) |
+
+## The receipts method
+
+Every skill here follows the same four rules.
+
+1. **No receipt, no claim.** A statement about the work comes with something a reader can check without trusting the agent. What could not be checked is listed as Not verified, never as passing.
+2. **Run it, do not read it.** Behaviour is observed in a browser or a terminal. Source code is read afterwards, to find the line to change.
+3. **Force what the happy path hides.** Double submits, failed requests, empty states, long text, a phone, the keyboard, reduced motion.
+4. **Publish the losses.** Each README reports the rounds a skill lost next to the ones it won, and `evals/` holds what you need to run them again.
 
 ## Install
 
 ```sh
-# Both skills, for your user
+# All four skills, for your user
 npx skills add fajarhide/skills -g
 
 # Or one of them
 npx skills add fajarhide/skills --skill ui-direction -g
 npx skills add fajarhide/skills --skill ui-receipts -g
+npx skills add fajarhide/skills --skill dev-receipts -g
+npx skills add fajarhide/skills --skill motion-receipts -g
 
-# Both skills measure pages in a browser
+# The skills measure pages in a browser
 pip install playwright && playwright install chromium
 ```
 
@@ -34,9 +49,24 @@ Build a landing page for our letterpress shop
 This page looks AI generated, give it its own look
 Audit the UI and UX of http://localhost:3000
 Why does this checkout feel off?
+Add shift swapping to the rota screen, I need it today
+The menu animation feels slow, check it
 ```
 
-To use both, build with `ui-direction`, then audit the result with `ui-receipts`. We tested each skill alone and have not measured the pair together.
+`dev-receipts` is the way in for any change. When the change touches a screen, it builds with `ui-direction` and checks with `ui-receipts`. Run `motion-receipts` when the page animates.
+
+## dev-receipts
+
+Without it, agents in our runs kept the plan in their heads, picked a bigger design than "I need it today" called for without saying so, never specified the empty, failure, phone or keyboard states, and shipped an unrequested refactor in the same PR. One said "done" about a button nobody had opened in a browser. The skill puts a spec on disk with a receipt named for every acceptance row, and builds the PR from that table.
+
+The same brief built with and without the skills, with every screenshot taken by the same script:
+
+| Without the skills | With them |
+| --- | --- |
+| <img src="assets/dev-receipts/before-desktop-swap.png" width="400" alt="Dialog listing colleague shifts, a locked one still selectable"> | <img src="assets/dev-receipts/after-desktop-swap.png" width="400" alt="Unworkable shifts greyed out, each with its reason"> |
+| <img src="assets/dev-receipts/before-desktop-fail.png" width="400" alt="The shift is locked and cannot be swapped"> | <img src="assets/dev-receipts/after-desktop-fail.png" width="400" alt="Locked after the page loaded, nothing changed, your shift is still selected"> |
+
+On a real repo, four runs with the skill all wrote a spec and a PR with receipts, and none of three runs without it did. Two runs with it also rewrote code nobody asked about, and one shipped a blank page. [All seven runs, and the limits](skills/dev-receipts/README.md).
 
 ## ui-direction
 
@@ -68,9 +98,15 @@ Test site with 18 seeded defects and 4 decoys, things that look wrong but are fi
 
 Runs vary a lot, so run it twice on anything important. The author wrote the test site and its answer key. [Before and after screenshots and the full results](skills/ui-receipts/README.md).
 
-## Why two skills
+## motion-receipts
 
-They began as one. With the build instructions inside the audit skill, a blind audit fell from 12.0 to 10.3 defects found, in three runs each. Splitting them keeps the audit as it was and loads the build instructions only when you are building.
+Reads the motion the browser runs, with `document.getAnimations()` polled every frame, in four runs: normal, reduced motion, JavaScript off and CPU slowed 4x. A test page with seven planted problems and one control catches all seven and leaves the control alone. It has not been measured against agents working without it. [Details](skills/motion-receipts/README.md).
+
+## Why separate skills
+
+They began as one. With the build instructions inside the audit skill, a blind audit fell from 12.0 to 10.3 defects found, in three runs each. Splitting them keeps the audit as it was and loads the build instructions only when you are building. `dev-receipts` follows the same rule: it names the other skills at the step that needs them and does not copy their text.
+
+The scores above for `ui-direction` and `ui-receipts` were measured before a few lines were added to each on 2026-11-05: worst real values, environment cases and a first look in the audit, and a copy recipe, browser surfaces and a motion budget in the build. The same day, `ui-direction` replaced its screen modes with four types named by the receipt that proves each screen worked. None of this has been measured yet.
 
 ## Licence
 

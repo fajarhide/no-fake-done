@@ -25,6 +25,8 @@ It saves a mobile and a desktop screenshot of each page, and reports console err
 
 ## Walk it
 
+First open the full-page screenshot and write the first three things your eye lands on. If they are not the page's one job, that is a hierarchy finding.
+
 Before opening the source, drive the primary path in a real browser and write down each action and what changed. Then force what a happy path never shows, on each primary action. Start each forced case from a fresh page load, because a timer or request left over from the last attempt will land in this one and put a false cause in your receipt. Read the result again after 5 s, since a slow response looks exactly like no response.
 
 | Force | Look for |
@@ -34,7 +36,8 @@ Before opening the source, drive the primary path in a real browser and write do
 | Make it fail: bad input, or route the request to a 500 | Input kept, the error names the fix and stays, retry works |
 | Slow the network | Loading state, disabled control, no layout jump |
 | Filter to nothing, delete the last row, new account | A real empty state with a next step |
-| 200 character string, emoji, 1 and 1000 rows | Wrapping, pluralising, layout holding |
+| Worst real values: 60 character unbroken email, one-letter name, non-Latin script, a count of exactly 1, 1000 rows | Wrapping, "1 member" not "1 members", truncation that keeps the full text reachable, layout holding |
+| Reduced motion, JavaScript off, 200% zoom, 320 px width | Motion stops, content still visible, no sideways scroll, nothing clipped |
 | Destroy something | Confirm naming the object, or undo |
 | Refresh, back button, open a deep link | State and filters survive, 404 is handled |
 | Tab through the page, then Escape in any dialog | Order, visible focus, focus returns |
