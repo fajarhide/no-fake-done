@@ -1,11 +1,15 @@
-# ui-direction
+# no-template-ui
+
+You ask for a coffee roaster's site. You get cream, terracotta, a serif headline and three icon cards, the page an agent hands almost everyone who asks. Swap the logo and it could sell anything.
+
+`no-template-ui` makes the agent build from what only this subject has, so the page could not belong to anyone else.
 
 A skill for AI coding agents that gives a new web page a look of its own. It makes the agent list what only this subject has, name the worlds its audience knows by heart, roll a die instead of picking the safest one, and check the rendered page.
 
-Agents asked for a coffee site produce cream, terracotta and a serif. In our tests, pages built without a skill were marked as generic AI output in 6 of 8 judgments on the two standalone rounds, and pages built with this one in 0 of 8.
+In our tests, pages built without a skill were marked as generic AI output in 6 of 8 judgments on the two standalone rounds, and pages built with this one in 0 of 8.
 
 ```sh
-npx skills add fajarhide/skills --skill ui-direction -g
+npx skills add fajarhide/skills --skill no-template-ui -g
 pip install playwright && playwright install chromium
 ```
 
@@ -69,7 +73,7 @@ The fourth row favours the recipe, since only those runs were asked to list what
 ## What it will not do
 
 - It does not make the page right for your business. Whether it looks better is your call, so it shows you the screenshots.
-- It does not replace an audit. Use [ui-receipts](../ui-receipts) to try to break the result.
+- It does not replace an audit. Use [no-broken-ui](../no-broken-ui) to try to break the result.
 - An existing `DESIGN.md` or brand decides. The skill then follows it and skips the choice of world.
 
 ## License

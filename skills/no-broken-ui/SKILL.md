@@ -1,9 +1,9 @@
 ---
-name: ui-receipts
+name: no-broken-ui
 description: Use when asked to audit, review, critique, QA or improve the UI or UX of a web app, site, page or flow, or before claiming a UI change is finished, even if the request is casual ("cek halaman ini", "why does this screen feel off", "is this usable", "make it look better", "looks AI generated", "review my dashboard", "how would you redesign this"). Covers usability, accessibility, responsive layout, visual polish and interaction states, on a live URL or a local project.
 ---
 
-# UI Receipts
+# no-broken-ui
 
 Audit what the page does, not what the code suggests. Reading source finds plenty, and most of it is guesses about behaviour nobody watched. A finding here carries a receipt: something a reader can check without trusting you.
 

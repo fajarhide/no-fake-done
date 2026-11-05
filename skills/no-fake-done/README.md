@@ -1,9 +1,13 @@
-# dev-receipts
+# no-fake-done
 
-Runs a change from a one-line request to a PR, and makes every claim on the way carry a receipt: a test, a command and its output, a screenshot, a step someone can repeat. When the change touches a screen, it hands the look to `ui-direction` and the check to `ui-receipts`.
+Your agent says "Done, all 20 tests pass." You merge it ten minutes before the demo. The clinic owner clicks Swap and nothing happens. The tests checked the server, and nobody had opened the page.
+
+`no-fake-done` makes the agent write down what done means before it writes code, then hand back a PR where every line of that list has its proof or says Not verified.
+
+Runs a change from a one-line request to a PR, and makes every claim on the way carry a receipt: a test, a command and its output, a screenshot, a step someone can repeat. When the change touches a screen, it hands the look to `no-template-ui` and the check to `no-broken-ui`.
 
 ```sh
-npx skills add fajarhide/skills --skill dev-receipts -g
+npx skills add fajarhide/skills --skill no-fake-done -g
 ```
 
 Install all three skills to get the screen steps. Without the other two, the agent still writes the spec and the PR table, and it marks the screen rows Not verified.
@@ -48,7 +52,7 @@ The agent without the skill lists every colleague shift and leaves the locked on
 
 | Without the skill | With the three skills |
 | --- | --- |
-| <img src="../../assets/dev-receipts/before-desktop-swap.png" width="440" alt="Dialog listing six colleague shifts, one marked Locked but still selectable"> | <img src="../../assets/dev-receipts/after-desktop-swap.png" width="440" alt="Two columns, unworkable shifts greyed out with the reason under each"> |
+| <img src="../../assets/no-fake-done/before-desktop-swap.png" width="440" alt="Dialog listing six colleague shifts, one marked Locked but still selectable"> | <img src="../../assets/no-fake-done/after-desktop-swap.png" width="440" alt="Two columns, unworkable shifts greyed out with the reason under each"> |
 
 ### When the server says no
 
@@ -56,7 +60,7 @@ Both screens show the error. The second one says what happened, that nothing cha
 
 | Without the skill | With the three skills |
 | --- | --- |
-| <img src="../../assets/dev-receipts/before-desktop-fail.png" width="440" alt="Red box: the shift is locked and cannot be swapped"> | <img src="../../assets/dev-receipts/after-desktop-fail.png" width="440" alt="Banner: locked by the rota manager after the page loaded, nothing changed, your shift is still selected"> |
+| <img src="../../assets/no-fake-done/before-desktop-fail.png" width="440" alt="Red box: the shift is locked and cannot be swapped"> | <img src="../../assets/no-fake-done/after-desktop-fail.png" width="440" alt="Banner: locked by the rota manager after the page loaded, nothing changed, your shift is still selected"> |
 
 ### On a phone
 
@@ -64,7 +68,7 @@ The first line of the second screen counts what can still be done and offers the
 
 | Without the skill | With the three skills |
 | --- | --- |
-| <img src="../../assets/dev-receipts/before-mobile.png" width="300" alt="Five shift cards, each with a Swap button"> | <img src="../../assets/dev-receipts/after-mobile.png" width="300" alt="3 of your 5 shifts can still be swapped, with a button for the next one"> |
+| <img src="../../assets/no-fake-done/before-mobile.png" width="300" alt="Five shift cards, each with a Swap button"> | <img src="../../assets/no-fake-done/after-mobile.png" width="300" alt="3 of your 5 shifts can still be swapped, with a button for the next one"> |
 
 ### What each agent checked
 
@@ -77,4 +81,4 @@ The first line of the second screen counts what can still be done and offers the
 
 ## Limits
 
-This is one build per side, and nobody judged the screenshots blind. It shows what the skill makes an agent do. It does not show by how much the skill wins. The look did not get bolder, because a screen people work in should get clearer, and `ui-direction` says so. The skill costs time: six minutes against thirty-five seconds here, most of it spent checking.
+This is one build per side, and nobody judged the screenshots blind. It shows what the skill makes an agent do. It does not show by how much the skill wins. The look did not get bolder, because a screen people work in should get clearer, and `no-template-ui` says so. The skill costs time: six minutes against thirty-five seconds here, most of it spent checking.

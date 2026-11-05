@@ -1,9 +1,9 @@
 ---
-name: dev-receipts
+name: no-fake-done
 description: Use when building a feature, fixing a bug or making any change that ends in a commit or PR, from a one-line request to merge, especially under time pressure ("I need it today", "keep it moving", "tell me it's done", "open the PR"), when the change touches a screen people use, or before saying a change is done.
 ---
 
-# Dev receipts
+# no-fake-done
 
 Every claim about a change carries a receipt: a test, a command and its output, a screenshot, a step someone can repeat. Done means every acceptance row has one. This runs a change from request to PR in five steps. A step the user has already covered, such as an approved spec, is skipped.
 
@@ -39,8 +39,8 @@ Not doing: <what someone might expect that you are leaving out>
 
 ## 2. Look, when a screen changes
 
-- A new page, or one that should have a look of its own: REQUIRED SUB-SKILL `ui-direction`.
-- A screen inside an existing app: use the app's own components and conventions. For a screen people work in, apply the Desk rules from `ui-direction`: the first line names what needs doing now with a button, each action states its consequence next to it ("accepting gives you Saturday night"), sample data opens on the hard cases, and a phone gets a layout built around the next task.
+- A new page, or one that should have a look of its own: REQUIRED SUB-SKILL `no-template-ui`.
+- A screen inside an existing app: use the app's own components and conventions. For a screen people work in, apply the Desk rules from `no-template-ui`: the first line names what needs doing now with a button, each action states its consequence next to it ("accepting gives you Saturday night"), sample data opens on the hard cases, and a phone gets a layout built around the next task.
 
 ## 3. Build
 
@@ -52,7 +52,7 @@ Not doing: <what someone might expect that you are leaving out>
 
 Run the project's own checks (tests, typecheck, lint, build) and keep their real output.
 
-If a screen changed, open it in a real browser. Unit tests and a clean build say nothing about a dialog. REQUIRED SUB-SKILL `ui-receipts`: probe the changed pages, walk the changed flow, and force every row of its table that applies to the change. Each Screen states row ends with a screenshot or a walk step.
+If a screen changed, open it in a real browser. Unit tests and a clean build say nothing about a dialog. REQUIRED SUB-SKILL `no-broken-ui`: probe the changed pages, walk the changed flow, and force every row of its table that applies to the change. Each Screen states row ends with a screenshot or a walk step.
 
 When no browser can run, still request each changed page over HTTP and check it returns the content you expect, since an empty or truncated file is the commonest break. A row you cannot check here (no browser, no test account, no database) goes under Not verified with the reason. It is never marked as passing.
 

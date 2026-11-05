@@ -1,9 +1,9 @@
 ---
-name: motion-receipts
+name: no-janky-motion
 description: Use when adding, reviewing or fixing motion on a web interface (transitions, micro-interactions, menus, dialogs, page intros, scroll animation), or when a page "feels slow", "janky", "laggy", "too animated" or "jumps", or before shipping a change that adds animation. Not for promo videos or rendered motion graphics.
 ---
 
-# Motion receipts
+# no-janky-motion
 
 Measure the motion the browser runs. A 150 ms transition is over before anyone reads the stylesheet, and a reduced-motion rule that never matches looks fine in code. Every finding carries a receipt: a selector, a measured number, or a labelled judgment.
 

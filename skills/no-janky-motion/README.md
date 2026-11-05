@@ -1,9 +1,13 @@
-# motion-receipts
+# no-janky-motion
+
+The menu takes 600 ms to open, and people open it forty times a day. On a cheap phone it stutters. With reduced motion switched on, the spinner still spins, and the headline that fades in on load stays invisible when the script fails.
+
+`no-janky-motion` measures the motion the browser runs and tells you which of it to cut.
 
 Checks the motion a page runs in a browser. `scripts/motion_probe.py` loads the page four times (normal, reduced motion, JavaScript off, CPU slowed 4x), performs one action, and records every animation and transition that starts, with its selector, properties, duration, easing and first keyframe, plus frame gaps and layout shift. The skill then has the agent reverse motions halfway, trigger them fast and use the keyboard, and report at most ten findings, each with its receipt.
 
 ```sh
-npx skills add fajarhide/skills --skill motion-receipts -g
+npx skills add fajarhide/skills --skill no-janky-motion -g
 pip install playwright && playwright install chromium
 ```
 
