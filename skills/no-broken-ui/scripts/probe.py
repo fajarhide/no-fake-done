@@ -126,6 +126,23 @@ MEASURE = r"""
 """
 
 
+def missing_security_headers(headers):
+    """What a browser needs to refuse sniffing, framing and injected scripts. None when there
+    were no HTTP headers to read, as with a file:// page."""
+    if headers is None:
+        return None
+    h = {k.lower(): v for k, v in headers.items()}
+    csp = h.get("content-security-policy", "")
+    missing = []
+    if not csp:
+        missing.append("content-security-policy")
+    if h.get("x-content-type-options", "").lower() != "nosniff":
+        missing.append("x-content-type-options: nosniff")
+    if "x-frame-options" not in h and "frame-ancestors" not in csp:
+        missing.append("x-frame-options or frame-ancestors")
+    return missing
+
+
 def launch(p):
     """Default browser, then an installed Chrome or Edge, then any cached build."""
     tries = [{}, {"channel": "chrome"}, {"channel": "msedge"}]
@@ -177,17 +194,19 @@ def main():
                 page.on("console", lambda m: console.append(f"{m.text[:200]} ({m.location.get('url', '')})") if m.type == "error" else None)
                 page.on("pageerror", lambda e: console.append(str(e)[:200]))
                 page.on("response", lambda r: failed.append(f"{r.status} {r.url}") if r.status >= 400 else None)
-                status = None
+                status, headers = None, None
                 try:
                     response = page.goto(url, wait_until="networkidle", timeout=30000)
                     status = response.status if response else None
+                    headers = response.headers if response and url.startswith("http") else None
                 except Exception as exc:  # slow pages still get measured
                     console.append(f"navigation: {str(exc)[:160]}")
                 shot = os.path.join(out_dir, f"{label}{slug}-{name}.png")
                 page.screenshot(path=shot, full_page=True)
                 report.append({
                     "url": url, "viewport": name, "status": status, "screenshot": shot,
-                    "consoleErrors": console, "failedRequests": failed, **page.evaluate(MEASURE),
+                    "consoleErrors": console,
+                    "missingSecurityHeaders": missing_security_headers(headers), "failedRequests": failed, **page.evaluate(MEASURE),
                 })
                 context.close()
         browser.close()
