@@ -1,5 +1,7 @@
 # fajarhide/skills
 
+<p align="center"><img src="assets/poster.png" width="840" alt="A thermal receipt stamped VERIFIED over NOT VERIFIED, listing no-fake-done, no-template-ui, no-broken-ui and no-janky-motion, each ticked, beside the line Stop your AI agent saying done when it isn't and the command npx skills add fajarhide/skills"></p>
+
 Stop your AI agent saying done when it isn't.
 
 An agent says "done" about a button nobody clicked, a page that renders blank, a PR whose tests pass while the screen is broken. You find out in the demo. With these five skills every claim carries a receipt: a test, a number measured in a real browser, a screenshot, or a step you can repeat. Anything the agent could not check is written down as Not verified. They sit on top of whatever process you already use. They are for web work, from a one-line request to a PR.
