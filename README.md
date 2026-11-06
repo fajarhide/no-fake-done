@@ -2,7 +2,7 @@
 
 Stop your AI agent saying done when it isn't.
 
-An agent says "done" about a button nobody clicked, a page that renders blank, a PR whose tests pass while the screen is broken. You find out in the demo. With these four skills every claim carries a receipt: a test, a number measured in a real browser, a screenshot, or a step you can repeat. Anything the agent could not check is written down as Not verified. They sit on top of whatever process you already use. They are for web work, from a one-line request to a PR.
+An agent says "done" about a button nobody clicked, a page that renders blank, a PR whose tests pass while the screen is broken. You find out in the demo. With these five skills every claim carries a receipt: a test, a number measured in a real browser, a screenshot, or a step you can repeat. Anything the agent could not check is written down as Not verified. They sit on top of whatever process you already use. They are for web work, from a one-line request to a PR.
 
 | Skill | Use it when | You get back | skills.sh |
 | --- | --- | --- | --- |
@@ -10,6 +10,7 @@ An agent says "done" about a button nobody clicked, a page that renders blank, a
 | [`no-template-ui`](skills/no-template-ui/README.md) | You are building a new page or a page looks generic | The page, plus a `DESIGN.md` that records why it looks the way it does | [![no-template-ui installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fno-template-ui&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/no-template-ui) |
 | [`no-broken-ui`](skills/no-broken-ui/README.md) | A page exists and you want to know what is wrong with it | Up to ten ranked findings, each with the action, number or labelled judgment behind it | [![no-broken-ui installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fno-broken-ui&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/no-broken-ui) |
 | [`no-janky-motion`](skills/no-janky-motion/README.md) | A page animates and you want to know whether it should, and whether it holds up | Animations measured in four browser runs, and up to ten findings with their numbers | [![no-janky-motion installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fno-janky-motion&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/no-janky-motion) |
+| [`no-leaky-app`](skills/no-leaky-app/README.md) | A web app you own is about to launch and you want its headers, cookies and caching right on every response | Before and after headers for each kind of response, and the fixes in one place | [![no-leaky-app installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fskills%2Fno-leaky-app&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/skills/no-leaky-app) |
 
 ## The receipts method
 
@@ -23,7 +24,7 @@ Every skill here follows the same four rules.
 ## Install
 
 ```sh
-# All four skills, for your user
+# All five skills, for your user
 npx skills add fajarhide/skills -g
 
 # Or one of them
@@ -31,6 +32,7 @@ npx skills add fajarhide/skills --skill no-template-ui -g
 npx skills add fajarhide/skills --skill no-broken-ui -g
 npx skills add fajarhide/skills --skill no-fake-done -g
 npx skills add fajarhide/skills --skill no-janky-motion -g
+npx skills add fajarhide/skills --skill no-leaky-app -g
 
 # The skills measure pages in a browser
 pip install playwright && playwright install chromium
@@ -55,7 +57,7 @@ Add shift swapping to the rota screen, I need it today
 The menu animation feels slow, check it
 ```
 
-`no-fake-done` is the way in for any change. When the change touches a screen, it builds with `no-template-ui` and checks with `no-broken-ui`. Run `no-janky-motion` when the page animates.
+`no-fake-done` is the way in for any change. When the change touches a screen, it builds with `no-template-ui` and checks with `no-broken-ui`. Run `no-janky-motion` when the page animates, and `no-leaky-app` before a launch.
 
 ### When each one runs
 
@@ -67,6 +69,7 @@ Your agent reads every skill's description at the start of a session and loads t
 | "build a landing page", "this looks AI generated" | `no-template-ui` |
 | "audit this page", "why does this checkout feel off", "review my dashboard" | `no-broken-ui` |
 | "the menu animation feels slow", "this page is janky" | `no-janky-motion` |
+| "harden this before launch", "check our security headers" | `no-leaky-app` |
 
 Choosing a skill from its description is the model's call, so now and then it will skip one that fits. To make it reliable, name the skill in your request ("use no-broken-ui to audit this page"), or add a line to the project's `CLAUDE.md` or `AGENTS.md`:
 
@@ -120,6 +123,10 @@ Runs vary a lot, so run it twice on anything important. The author wrote the tes
 ## no-janky-motion
 
 Reads the motion the browser runs, with `document.getAnimations()` polled every frame, in four runs: normal, reduced motion, JavaScript off and CPU slowed 4x. A test page with seven planted problems and one control catches all seven and leaves the control alone. It has not been measured against agents working without it. [Details](skills/no-janky-motion/README.md).
+
+## no-leaky-app
+
+Requests one of each response the app sends, a page, a 404, an error, a static file and an API answer, and checks every one against a table of headers and delivery rules. On an app whose obvious gaps were already fixed, agents without it closed 15 of 21 remaining gaps and agents with it closed 21 of 21; on a second app with plainly wrong header values both closed 21 of 21. It never broke either app. The checklist is the skill, so the first round shows it is followed, not that it finds what nobody listed. [Both rounds and the limits](skills/no-leaky-app/README.md).
 
 ## Why separate skills
 

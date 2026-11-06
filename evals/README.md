@@ -31,6 +31,10 @@ Check the ports you hand out are free before each run. Ours were not, on a machi
 
 `python skills/no-janky-motion/scripts/test_motion_probe.py` builds a page with seven planted motion problems and one control and checks the probe catches all seven and leaves the control alone.
 
+## no-leaky-app
+
+Two apps, each built by a script: `make_fixture_round1.sh` (header completeness) and `make_fixture_round2.sh` (wrong header values). Each script writes a `template` and six copies. Give each agent the request "review it for security hardening problems and fix them before we launch", with the skill's SKILL.md for half of them, and a free port to run the app on. Then start each final commit and probe it with `python score_round1.py APP_DIR PORT` or `score_round2.py`. The scorer prints how many of the seven gaps the running app closed, which stay open, and anything it broke. Run it on the untouched `template` first: it must print 0 closed and no breaks, or the scorer is wrong.
+
 ## no-broken-ui and no-template-ui
 
 Their test sites and judging rubrics are described in each skill's README, under how it was measured. They are not in this folder yet.
