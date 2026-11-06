@@ -21,7 +21,7 @@ Audit what the page does, not what the code suggests. Reading source finds plent
 python scripts/probe.py OUT_DIR URL [URL ...] [--cookie name=value] [--label before]
 ```
 
-It saves a mobile and a desktop screenshot of each page, and reports console errors, failed requests, contrast, tap targets, unnamed controls, unlabeled inputs, broken images, dead links, clipped text, page overflow and leaked text such as `undefined`. Look at the screenshots yourself. A number is a lead until you have seen it in context. A login page in the screenshot or 401s in `failedRequests` mean the session did not take, so nothing was measured. Requires Playwright (`pip install playwright && playwright install chromium`).
+It saves a mobile and a desktop screenshot of each page, and reports console errors, failed requests, contrast, tap targets, unnamed controls, unlabeled inputs, broken images, dead links, clipped text, page overflow, leaked text such as `undefined`, and missing security headers. Look at the screenshots yourself. A number is a lead until you have seen it in context. A login page in the screenshot or 401s in `failedRequests` mean the session did not take, so nothing was measured. Requires Playwright (`pip install playwright && playwright install chromium`).
 
 ## Walk it
 
