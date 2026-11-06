@@ -1,6 +1,6 @@
 # fajarhide/skills
 
-<p align="center"><img src="assets/poster.png" width="840" alt="A thermal receipt stamped VERIFIED over NOT VERIFIED, listing no-fake-done, no-template-ui, no-broken-ui and no-janky-motion, each ticked, beside the line Stop your AI agent saying done when it isn't and the command npx skills add fajarhide/skills"></p>
+<p align="center"><img src="assets/poster.png" width="840" alt="A thermal receipt stamped VERIFIED over NOT VERIFIED, listing no-fake-done, no-template-ui, no-broken-ui, no-janky-motion and no-leaky-app, each ticked, beside the line Stop your AI agent saying done when it isn't and the command npx skills add fajarhide/skills"></p>
 
 Stop your AI agent saying done when it isn't.
 
