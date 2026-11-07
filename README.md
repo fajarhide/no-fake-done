@@ -4,7 +4,9 @@
 
 Stop your AI agent saying done when it isn't.
 
-An agent says "done" about a button nobody clicked, a page that renders blank, a PR whose tests pass while the screen is broken. You find out in the demo. With these five skills every claim carries a receipt: a test, a number measured in a real browser, a screenshot, or a step you can repeat. Anything the agent could not check is written down as Not verified. They sit on top of whatever process you already use. They are for web work, from a one-line request to a PR.
+Vibe coding gets you to a demo fast. Then the agent says "done" about a button nobody clicked, a page that renders blank, a PR whose tests pass while the screen is broken, and you find out in front of a customer. What separates that from professional work is everything around the code: deciding what done means before starting, checking the result in a real browser, trying what can go wrong, and leaving proof a reviewer can check.
+
+These five skills make your agent do that part. Every claim carries a receipt: a test, a number measured in a real browser, a screenshot, or a step you can repeat. Anything the agent could not check is written down as Not verified. You keep prompting the way you do now. They are for web work, from a one-line request to a PR.
 
 | Skill | Use it when | You get back | skills.sh |
 | --- | --- | --- | --- |
@@ -13,6 +15,22 @@ An agent says "done" about a button nobody clicked, a page that renders blank, a
 | [`no-broken-ui`](skills/no-broken-ui/README.md) | A page exists and you want to know what is wrong with it | Up to ten ranked findings, each with the action, number or labelled judgment behind it | [![no-broken-ui installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fno-fake-done%2Fno-broken-ui&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/no-fake-done/no-broken-ui) |
 | [`no-janky-motion`](skills/no-janky-motion/README.md) | A page animates and you want to know whether it should, and whether it holds up | Animations measured in four browser runs, and up to ten findings with their numbers | [![no-janky-motion installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fno-fake-done%2Fno-janky-motion&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/no-fake-done/no-janky-motion) |
 | [`no-leaky-app`](skills/no-leaky-app/README.md) | A web app you own is about to launch and you want its headers, cookies and caching right on every response | Before and after headers for each kind of response, and the fixes in one place | [![no-leaky-app installs on skills.sh](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fwww.skills.sh%2Ffajarhide%2Fno-fake-done%2Fno-leaky-app&search=Installs%3C%5C%2F%5Ba-z%5D%2B%3E%5Cs%2A%28%3F%3A%3C%5B%5E%3E%5D%2B%3E%5Cs%2A%29%2A%28%5B0-9.%2CKM%E2%80%93-%5D%2B%29&replace=%241&label=installs)](https://www.skills.sh/fajarhide/no-fake-done/no-leaky-app) |
+
+## From a prompt to a PR you can merge
+
+What a careful engineer does around a change, and the skill that has your agent do it:
+
+| A professional would | Without a skill, agents in our runs | The skill |
+| --- | --- | --- |
+| Write down what done means before coding | kept the plan in their heads, 2 of 2 | `no-fake-done` puts a spec on disk with a receipt named for every acceptance row |
+| Keep the change to what was asked | shipped an unrequested refactor, 2 of 2 | `no-fake-done` traces every changed line to a row and splits the rest out, though 2 of 4 runs with it still rewrote code nobody asked about |
+| Give a new page a look of its own | produced pages marked as generic AI output, 4 of 4 | `no-template-ui` builds from what only that subject has |
+| Click through it before calling it done | said "done" about a button nobody had opened, 1 of 2 | `no-broken-ui` drives the page and forces failures, empty states and the phone |
+| Check what it feels like on a slow device | (not measured) | `no-janky-motion` measures every animation in four browser runs |
+| Check headers and caching before launch | left 6 of 21 gaps open in one round, tied in the other | `no-leaky-app` checks every kind of response the app sends |
+| Hand the reviewer evidence, not a summary | wrote PRs with no receipts, 3 of 3 | `no-fake-done` builds the PR body from the acceptance table |
+
+Two checks keep this honest without relying on the agent's word. `skills/no-fake-done/scripts/receipts.py` fails a spec or PR body with an empty or filler receipt, or one that names a file the repo does not have, so a git hook or CI job can run it whichever agent wrote the code. In Claude Code, `no-broken-ui` also holds the first "done" after an unprobed UI change until the page is checked or named as Not verified.
 
 ## The receipts method
 
