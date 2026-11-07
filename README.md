@@ -103,16 +103,19 @@ Without it, agents in our runs kept the plan in their heads, picked a bigger des
 
 The same brief built with and without the skills, with every screenshot taken by the same script:
 
-| Without the skills | With them |
-| --- | --- |
-| <img src="assets/no-fake-done/before-desktop-swap.png" width="400" alt="Dialog listing colleague shifts, a locked one still selectable"> | <img src="assets/no-fake-done/after-desktop-swap.png" width="400" alt="Unworkable shifts greyed out, each with its reason"> |
-| <img src="assets/no-fake-done/before-desktop-fail.png" width="400" alt="The shift is locked and cannot be swapped"> | <img src="assets/no-fake-done/after-desktop-fail.png" width="400" alt="Locked after the page loaded, nothing changed, your shift is still selected"> |
+<img src="assets/compare/no-fake-done-swap.png" width="100%" alt="Without the skills, a locked shift is offered like any other. With them, shifts you cannot take are greyed out with their reason, past and in-progress shifts cannot be given away, and the shift you give stays highlighted.">
+
+<img src="assets/compare/no-fake-done-locked.png" width="100%" alt="Without the skills, the locked shift stays selected and the error only names the lock. With them, a banner says the shift was locked after the page loaded, nothing changed, and your own shift is still selected.">
 
 On a real repo, four runs with the skill all wrote a spec and a PR with receipts, and none of three runs without it did. Two runs with it also rewrote code nobody asked about, and one shipped a blank page. [All seven runs, and the limits](skills/no-fake-done/README.md).
 
 ## no-template-ui
 
 Asked for a coffee site, agents produce cream, terracotta and a serif. This skill has the agent list what only this subject has, name seven worlds its audience knows by heart, and roll a die, because a model left to choose picks the safest one.
+
+<img src="assets/compare/no-template-ui-coffee.png" width="100%" alt="The same coffee roastery brief. Without the skills: a cream page, a serif headline and a terracotta button. With them: a dark page whose headline reads Ten seats, one cupping table, Saturday, next to a seat plan where each free seat is the booking button.">
+
+One brief, one run each, not a scored round. [How these examples were made](evals/examples/README.md).
 
 Screens people work in skip the die. The first line names what needs doing now, with a button, and the sample data opens on the hard cases.
 
@@ -130,6 +133,8 @@ Nearly the same text scored 6.50 when it lived inside `no-broken-ui`, and we can
 
 Most agents review UI by reading code, and guess at how the page behaves. This skill has the agent drive the page and force what a happy path never shows: double submits, failed requests, empty states, long text, reloads and keyboard use.
 
+<img src="assets/compare/no-broken-ui-double-pay.png" width="80%" alt="A checkout on a phone. Before: the page says Rp 95.000 and a double-click on Pay now creates two paid orders of Rp 120.000. After, fixed from the audit's findings: the full total with shipping shows before paying, the button says Pay Rp 120.000, and the same double-click makes one order.">
+
 Test site with 18 seeded defects and 4 decoys, things that look wrong but are fine:
 
 | Mean per run | no-broken-ui (9 runs) | No skill (6 runs) |
@@ -144,9 +149,15 @@ Runs vary a lot, so run it twice on anything important. The author wrote the tes
 
 Reads the motion the browser runs, with `document.getAnimations()` polled every frame, in four runs: normal, reduced motion, JavaScript off and CPU slowed 4x. A test page with seven planted problems and one control catches all seven and leaves the control alone. It has not been measured against agents working without it. [Details](skills/no-janky-motion/README.md).
 
+<img src="assets/compare/no-janky-motion-menu.png" width="80%" alt="What the motion probe reported on a demo menu. Before: height animated, 600 ms, ease-in on an entrance, grows from scale(0), ignores reduced motion, a spinner looping off screen. After a fix by hand: opacity and transform only, 160 ms ease-out, reduced motion turns it off, and two findings left, both shown.">
+
 ## no-leaky-app
 
 Requests one of each response the app sends, a page, a 404, an error, a static file and an API answer, and checks every one against a table of headers and delivery rules. On an app whose obvious gaps were already fixed, agents without it closed 15 of 21 remaining gaps and agents with it closed 21 of 21; on a second app with plainly wrong header values both closed 21 of 21. It never broke either app. The checklist is the skill, so the first round shows it is followed, not that it finds what nobody listed. [Both rounds and the limits](skills/no-leaky-app/README.md).
+
+<img src="assets/compare/no-leaky-app-harden.png" width="80%" alt="The same app and request, scored on the running app. Without the skills: 6 of 7 gaps closed, no Permissions-Policy, and the public maps key the page needs deleted. With them: 7 of 7 closed and nothing broken.">
+
+One run each on the round 1 app. [How these examples were made](evals/examples/README.md).
 
 ## Why separate skills
 

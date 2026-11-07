@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Kopi Lereng</title><style>
+body{margin:0;font:16px/1.5 system-ui,sans-serif;background:#f6f2ea;color:#2a2018}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 32px;border-bottom:1px solid #2a201822}
+button{font:inherit;padding:8px 16px;border-radius:8px;border:1px solid #2a2018;background:#fff;cursor:pointer}
+nav{position:absolute;right:32px;top:64px;width:240px;background:#fff;border:1px solid #2a201822;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px #0002}
+nav a{display:block;padding:12px 18px;color:inherit;text-decoration:none;border-bottom:1px solid #2a201811}
+main{padding:48px 32px;max-width:640px}
+.spin{width:18px;height:18px;border:3px solid #c8b9a6;border-top-color:#6b3e1f;border-radius:50%;animation:spin 1s linear infinite;margin-top:2400px}
+@keyframes spin{to{transform:rotate(360deg)}}
+nav{height:0;transform:scale(0);transition:height 600ms ease-in,transform 600ms ease-in}nav.open{height:196px;transform:scale(1)}
+</style></head><body>
+<header><strong>Kopi Lereng</strong><button id="menu-btn" onclick="document.getElementById('menu').classList.toggle('open')">Menu</button></header>
+<nav id="menu"><a href="#">Beans</a><a href="#">Saturday cupping</a><a href="#">Roast days</a><a href="#">Contact</a></nav>
+<main><h1>Roasted twice a week on the slopes of Merapi</h1><p>Order beans online, or join ten people at the Saturday cupping.</p><div class="spin"></div></main>
+</body></html>

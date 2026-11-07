@@ -1,0 +1,418 @@
+{
+ "swap": {
+  "kicker": "no-fake-done · same brief, same app",
+  "title": "Picking the shift to take",
+  "foot": "Both screens taken by the same script",
+  "sides": [
+   {
+    "kind": "bad",
+    "stamp": "WITHOUT THE SKILLS",
+    "img": "before-desktop-swap.png",
+    "marks": [
+     {
+      "box": [
+       400,
+       355,
+       480,
+       45
+      ],
+      "text": "A locked shift is offered like any other"
+     }
+    ]
+   },
+   {
+    "kind": "good",
+    "stamp": "WITH THE SKILLS",
+    "img": "after-desktop-swap.png",
+    "marks": [
+     {
+      "box": [
+       652,
+       239,
+       462,
+       64
+      ],
+      "text": "Shifts you cannot take are greyed out, each with its reason",
+      "dot": "right"
+     },
+     {
+      "box": [
+       166,
+       225,
+       462,
+       136
+      ],
+      "text": "Past and in-progress shifts cannot be given away"
+     },
+     {
+      "box": [
+       166,
+       370,
+       462,
+       47
+      ],
+      "text": "The shift you are giving stays highlighted"
+     }
+    ]
+   }
+  ]
+ },
+ "fail": {
+  "kicker": "no-fake-done · same brief, same app",
+  "title": "When the shift gets locked mid-swap",
+  "foot": "Both screens taken by the same script",
+  "sides": [
+   {
+    "kind": "bad",
+    "stamp": "WITHOUT THE SKILLS",
+    "img": "before-desktop-fail.png",
+    "marks": [
+     {
+      "box": [
+       400,
+       316,
+       480,
+       45
+      ],
+      "text": "The locked shift is still the one selected"
+     },
+     {
+      "box": [
+       400,
+       533,
+       480,
+       66
+      ],
+      "text": "The error names the lock and stops there"
+     }
+    ]
+   },
+   {
+    "kind": "good",
+    "stamp": "WITH THE SKILLS",
+    "img": "after-desktop-fail.png",
+    "marks": [
+     {
+      "box": [
+       166,
+       150,
+       948,
+       67
+      ],
+      "text": "Says what changed, that nothing moved, and what to do next"
+     },
+     {
+      "box": [
+       166,
+       569,
+       462,
+       48
+      ],
+      "text": "Your shift is still selected, so you pick again in one step"
+     }
+    ]
+   }
+  ]
+ },
+ "double": {
+  "narrow": true,
+  "kicker": "no-broken-ui · same page, same steps",
+  "title": "Double-click on Pay",
+  "foot": "Test page, synthetic data, fixed from the audit's findings",
+  "sides": [
+   {
+    "kind": "bad",
+    "stamp": "WITHOUT THE SKILLS",
+    "img": "checkout-double-before.png",
+    "w": 780,
+    "h": 1520,
+    "marks": [
+     {
+      "box": [
+       40,
+       350,
+       340,
+       50
+      ],
+      "text": "Shows Rp 95.000",
+      "dot": "right"
+     },
+     {
+      "box": [
+       80,
+       1150,
+       600,
+       190
+      ],
+      "text": "Charges Rp 120.000, twice"
+     }
+    ]
+   },
+   {
+    "kind": "good",
+    "stamp": "WITH THE SKILLS",
+    "img": "checkout-double-after.png",
+    "w": 780,
+    "h": 1520,
+    "marks": [
+     {
+      "box": [
+       40,
+       350,
+       580,
+       100
+      ],
+      "text": "The full total, before you pay",
+      "dot": "right"
+     },
+     {
+      "box": [
+       40,
+       944,
+       302,
+       84
+      ],
+      "text": "The button says what it charges",
+      "dot": "right"
+     },
+     {
+      "box": [
+       80,
+       1180,
+       300,
+       50
+      ],
+      "text": "One order from the same double-click"
+     }
+    ]
+   }
+  ]
+ },
+ "leaky": {
+  "narrow": true,
+  "kicker": "no-leaky-app · same app, same request",
+  "title": "“Harden it before we launch”",
+  "foot": "Scored on the running app by evals/no-leaky-app · one run each",
+  "sides": [
+   {
+    "kind": "bad",
+    "stamp": "WITHOUT THE SKILLS",
+    "bar": "paws-portal, after the run",
+    "rows": [
+     {
+      "ok": true,
+      "text": "Strong CSP, no unsafe-inline or unsafe-eval"
+     },
+     {
+      "ok": true,
+      "text": "Headers on the 404, static and API responses too"
+     },
+     {
+      "ok": false,
+      "text": "Referrer-Policy and Permissions-Policy",
+      "note": "No Permissions-Policy on any response"
+     },
+     {
+      "ok": true,
+      "text": "HSTS"
+     },
+     {
+      "ok": true,
+      "text": "No X-Powered-By or version banner"
+     },
+     {
+      "ok": true,
+      "text": "Account data not cacheable"
+     },
+     {
+      "ok": true,
+      "text": "No source map served, no session token in localStorage"
+     },
+     {
+      "ok": false,
+      "text": "Broke the page",
+      "note": "Deleted the public maps key app.js needs"
+     }
+    ],
+    "total": "6 of 7 closed, 1 thing broken"
+   },
+   {
+    "kind": "good",
+    "stamp": "WITH THE SKILLS",
+    "bar": "paws-portal, after the run",
+    "rows": [
+     {
+      "ok": true,
+      "text": "Strong CSP, no unsafe-inline or unsafe-eval"
+     },
+     {
+      "ok": true,
+      "text": "Headers on the 404, static and API responses too"
+     },
+     {
+      "ok": true,
+      "text": "Referrer-Policy and Permissions-Policy"
+     },
+     {
+      "ok": true,
+      "text": "HSTS"
+     },
+     {
+      "ok": true,
+      "text": "No X-Powered-By or version banner"
+     },
+     {
+      "ok": true,
+      "text": "Account data not cacheable"
+     },
+     {
+      "ok": true,
+      "text": "No source map served, no session token in localStorage"
+     },
+     {
+      "ok": true,
+      "text": "Nothing broken",
+      "note": "Login, page script and the maps key all still work"
+     }
+    ],
+    "total": "7 of 7 closed, nothing broken"
+   }
+  ]
+ },
+ "motion": {
+  "narrow": true,
+  "kicker": "no-janky-motion · same menu, probed twice",
+  "title": "Opening the menu",
+  "foot": "Demo page, fixed by hand from the probe's findings",
+  "sides": [
+   {
+    "kind": "bad",
+    "stamp": "WITHOUT THE SKILLS",
+    "bar": "motion_probe.py, before",
+    "rows": [
+     {
+      "ok": false,
+      "text": "Animates height",
+      "note": "A layout property, so every frame reflows the page"
+     },
+     {
+      "ok": false,
+      "text": "600 ms",
+      "note": "Slow for a menu"
+     },
+     {
+      "ok": false,
+      "text": "ease-in on an entrance",
+      "note": "Starts slow, so the click feels ignored"
+     },
+     {
+      "ok": false,
+      "text": "Grows from scale(0)",
+      "note": "Pops out of a point"
+     },
+     {
+      "ok": false,
+      "text": "Ignores reduced motion",
+      "note": "The menu and the spinner still move"
+     },
+     {
+      "ok": false,
+      "text": "Spinner loops off screen",
+      "note": "Runs forever where nobody sees it"
+     }
+    ],
+    "total": "6 kinds of finding"
+   },
+   {
+    "kind": "good",
+    "stamp": "WITH THE SKILLS",
+    "bar": "motion_probe.py, after",
+    "rows": [
+     {
+      "ok": true,
+      "text": "Opacity and transform only",
+      "note": "No reflow while it opens"
+     },
+     {
+      "ok": true,
+      "text": "160 ms, ease-out",
+      "note": "Starts fast, settles gently"
+     },
+     {
+      "ok": true,
+      "text": "Slides 6 px from 98%",
+      "note": "Opens from its button, no pop"
+     },
+     {
+      "ok": true,
+      "text": "Reduced motion turns it off"
+     },
+     {
+      "ok": false,
+      "text": "Spinner still loops off screen",
+      "note": "Left as is, and the probe still says so"
+     },
+     {
+      "ok": false,
+      "text": "Menu hidden with JavaScript off",
+      "note": "New finding: fine here, the menu needs a click anyway"
+     }
+    ],
+    "total": "2 findings left, both shown"
+   }
+  ]
+ },
+ "template": {
+  "kicker": "no-template-ui · same brief, one run each",
+  "title": "A one-page site for a coffee roastery",
+  "foot": "Brief: Kopi Lereng, roasts twice a week, ten-seat cupping on Saturdays · seat states are sample data",
+  "sides": [
+   {
+    "kind": "bad",
+    "stamp": "WITHOUT THE SKILLS",
+    "img": "tmpl-w.png",
+    "w": 2560,
+    "h": 1600,
+    "marks": [
+     {
+      "box": [
+       600,
+       220,
+       1380,
+       790
+      ],
+      "text": "Cream, terracotta and a serif: the look most coffee briefs get"
+     }
+    ]
+   },
+   {
+    "kind": "good",
+    "stamp": "WITH THE SKILLS",
+    "img": "tmpl-s.png",
+    "w": 2560,
+    "h": 1600,
+    "marks": [
+     {
+      "box": [
+       1355,
+       668,
+       925,
+       575
+      ],
+      "text": "The Saturday cupping table is the booking: tap a free seat",
+      "dot": "right"
+     },
+     {
+      "box": [
+       280,
+       250,
+       930,
+       1105
+      ],
+      "text": "The headline says what only this roaster has"
+     }
+    ]
+   }
+  ]
+ }
+}
