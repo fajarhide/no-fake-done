@@ -1,6 +1,16 @@
 ---
 name: no-broken-ui
 description: Use when asked to audit, review, critique, QA or improve the UI or UX of a web app, site, page or flow, or before claiming a UI change is finished, even if the request is casual ("cek halaman ini", "why does this screen feel off", "is this usable", "make it look better", "looks AI generated", "review my dashboard", "how would you redesign this"). Covers usability, accessibility, responsive layout, visual polish and interaction states, on a live URL or a local project.
+hooks:
+  PostToolUse:
+    - matcher: "Edit|Write|MultiEdit|NotebookEdit|Bash"
+      hooks:
+        - type: command
+          command: 'for d in "${CLAUDE_SKILL_DIR:-}" "${CLAUDE_PROJECT_DIR:-.}/.claude/skills/no-broken-ui" "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills/no-broken-ui" "$HOME/.claude/skills/no-broken-ui"; do [ -f "$d/scripts/gate.py" ] && exec python3 "$d/scripts/gate.py"; done; exit 0'
+  Stop:
+    - hooks:
+        - type: command
+          command: 'for d in "${CLAUDE_SKILL_DIR:-}" "${CLAUDE_PROJECT_DIR:-.}/.claude/skills/no-broken-ui" "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills/no-broken-ui" "$HOME/.claude/skills/no-broken-ui"; do [ -f "$d/scripts/gate.py" ] && exec python3 "$d/scripts/gate.py"; done; exit 0'
 ---
 
 # no-broken-ui
@@ -22,7 +32,7 @@ Audit what the page does, not what the code suggests. Reading source finds plent
 python scripts/probe.py OUT_DIR URL [URL ...] [--storage-state state.json] [--cookie name=value] [--label before]
 ```
 
-It saves a mobile and a desktop screenshot of each page, and reports console errors, failed requests, contrast, tap targets, unnamed controls, unlabeled inputs, broken images, dead links, clipped text, page overflow, leaked text such as `undefined`, and missing security headers. Look at the screenshots yourself. A number is a lead until you have seen it in context. A login page in the screenshot or 401s in `failedRequests` mean the session did not take, so nothing was measured. Behind a login, pass the whole session with `--storage-state` (what Playwright's `context.storage_state(path=...)` saves after a scripted login). One `--cookie` for the session alone drops the rest, such as a CSRF cookie, and the same 403 then shows up on every page as a false finding. Requires Playwright (`pip install playwright && playwright install chromium`).
+It saves a mobile and a desktop screenshot of each page, and reports console errors, failed requests, contrast, tap targets, unnamed controls, unlabeled inputs, broken images, dead links, clipped text, page overflow, leaked text such as `undefined`, and missing security headers. In Claude Code, loading this skill also turns on a stop check (`scripts/gate.py`): if UI files change after the last `probe.py` run, the first attempt to finish is held once with a reminder to probe those pages or name them under Not verified. Look at the screenshots yourself. A number is a lead until you have seen it in context. A login page in the screenshot or 401s in `failedRequests` mean the session did not take, so nothing was measured. Behind a login, pass the whole session with `--storage-state` (what Playwright's `context.storage_state(path=...)` saves after a scripted login). One `--cookie` for the session alone drops the rest, such as a CSRF cookie, and the same 403 then shows up on every page as a false finding. Requires Playwright (`pip install playwright && playwright install chromium`).
 
 ## Walk it
 
