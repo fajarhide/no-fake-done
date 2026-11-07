@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Measure rendered pages and save a screenshot per page and viewport.
 
-usage: probe.py OUT_DIR URL [URL ...] [--cookie name=value] [--label before]
+usage: probe.py OUT_DIR URL [URL ...] [--storage-state state.json] [--cookie name=value] [--label before]
 Prints JSON. Each finding names a selector, so a reader can check it by hand.
 Needs Playwright: pip install playwright && playwright install chromium
 """
@@ -45,11 +45,15 @@ MEASURE = r"""
   };
   const text = (el) => (el.innerText || el.value || '').trim().replace(/\s+/g, ' ').slice(0, 60);
   const bgOf = (el) => {
-    let c = [255, 255, 255, 0];
+    // Layers composite front to back. A transparent wrapper adds nothing, so it must not pull the colour towards black.
+    let c = [0, 0, 0, 0];
     for (let n = el; n; n = n.parentElement) {
       const s = getComputedStyle(n);
       if (s.backgroundImage !== 'none') return null;
-      c = c[3] === 1 ? c : over(c, rgba(s.backgroundColor).map((v, i) => i === 3 ? v : v)).slice(0, 3).concat(Math.min(1, c[3] + rgba(s.backgroundColor)[3] * (1 - c[3])));
+      const p = rgba(s.backgroundColor);
+      if (p[3] === 0) continue;
+      const a = c[3] + p[3] * (1 - c[3]);
+      c = [0, 1, 2].map((i) => (c[i] * c[3] + p[i] * p[3] * (1 - c[3])) / a).concat(a);
       if (c[3] >= 1) return c;
     }
     return over(c, [255, 255, 255, 1]);
@@ -166,6 +170,11 @@ def main():
         i = args.index("--cookie")
         cookies.append(args[i + 1])
         del args[i : i + 2]
+    state = None
+    if "--storage-state" in args:
+        i = args.index("--storage-state")
+        state = args[i + 1]
+        del args[i : i + 2]
     label = ""
     if "--label" in args:
         i = args.index("--label")
@@ -182,7 +191,7 @@ def main():
         for url in urls:
             slug = re.sub(r"\W+", "-", urlparse(url).path).strip("-") or "home"
             for name, (width, height) in VIEWPORTS.items():
-                context = browser.new_context(viewport={"width": width, "height": height})
+                context = browser.new_context(viewport={"width": width, "height": height}, storage_state=state)
                 for cookie in cookies:
                     key, value = cookie.split("=", 1)
                     # Scoped to the host, or API calls outside the page's path go out logged out.
