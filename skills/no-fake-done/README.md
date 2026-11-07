@@ -7,7 +7,7 @@ Your agent says "Done, all 20 tests pass." You merge it ten minutes before the d
 Runs a change from a one-line request to a PR, and makes every claim on the way carry a receipt: a test, a command and its output, a screenshot, a step someone can repeat. When the change touches a screen, it hands the look to `no-template-ui` and the check to `no-broken-ui`.
 
 ```sh
-npx skills add fajarhide/skills --skill no-fake-done -g
+npx skills add fajarhide/no-fake-done --skill no-fake-done -g
 ```
 
 Install all three skills to get the screen steps. Without the other two, the agent still writes the spec and the PR table, and it marks the screen rows Not verified.
