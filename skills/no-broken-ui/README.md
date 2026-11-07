@@ -7,7 +7,7 @@ The screenshot looks finished. Then a customer double-clicks Pay and is charged 
 A UI and UX audit skill for AI coding agents. The agent opens your app in a real browser, tries to break it, and reports what it found. Every finding carries a receipt: the action it performed, a number it measured, or a judgment labelled as one.
 
 ```sh
-npx skills add fajarhide/skills --skill no-broken-ui -g
+npx skills add fajarhide/no-fake-done --skill no-broken-ui -g
 pip install playwright && playwright install chromium
 ```
 

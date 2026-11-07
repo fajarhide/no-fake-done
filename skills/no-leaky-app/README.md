@@ -5,7 +5,7 @@ You add a strict Content-Security-Policy to the home page and call the app harde
 `no-leaky-app` makes the agent request one of each response your app sends, check every one against a table of headers and delivery rules, fix them in the one place every response passes through, and show the headers before and after.
 
 ```sh
-npx skills add fajarhide/skills --skill no-leaky-app -g
+npx skills add fajarhide/no-fake-done --skill no-leaky-app -g
 ```
 
 Use it on an app you own or are allowed to change.

@@ -1,6 +1,6 @@
-# fajarhide/skills
+# no-fake-done
 
-<p align="center"><img src="assets/poster.png" width="840" alt="A thermal receipt stamped VERIFIED over NOT VERIFIED, listing no-fake-done, no-template-ui, no-broken-ui, no-janky-motion and no-leaky-app, each ticked, beside the line Stop your AI agent saying done when it isn't and the command npx skills add fajarhide/skills"></p>
+<p align="center"><img src="assets/poster.png" width="840" alt="A thermal receipt stamped VERIFIED over NOT VERIFIED, listing no-fake-done, no-template-ui, no-broken-ui, no-janky-motion and no-leaky-app, each ticked, beside the line Stop your AI agent saying done when it isn't and the command npx skills add fajarhide/no-fake-done"></p>
 
 Stop your AI agent saying done when it isn't.
 
@@ -27,14 +27,14 @@ Every skill here follows the same four rules.
 
 ```sh
 # All five skills, for your user
-npx skills add fajarhide/skills -g
+npx skills add fajarhide/no-fake-done -g
 
 # Or one of them
-npx skills add fajarhide/skills --skill no-template-ui -g
-npx skills add fajarhide/skills --skill no-broken-ui -g
-npx skills add fajarhide/skills --skill no-fake-done -g
-npx skills add fajarhide/skills --skill no-janky-motion -g
-npx skills add fajarhide/skills --skill no-leaky-app -g
+npx skills add fajarhide/no-fake-done --skill no-template-ui -g
+npx skills add fajarhide/no-fake-done --skill no-broken-ui -g
+npx skills add fajarhide/no-fake-done --skill no-fake-done -g
+npx skills add fajarhide/no-fake-done --skill no-janky-motion -g
+npx skills add fajarhide/no-fake-done --skill no-leaky-app -g
 
 # The skills measure pages in a browser
 pip install playwright && playwright install chromium

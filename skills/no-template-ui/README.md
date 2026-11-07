@@ -9,7 +9,7 @@ A skill for AI coding agents that gives a new web page a look of its own. It mak
 In our tests, pages built without a skill were marked as generic AI output in 6 of 8 judgments on the two standalone rounds, and pages built with this one in 0 of 8.
 
 ```sh
-npx skills add fajarhide/skills --skill no-template-ui -g
+npx skills add fajarhide/no-fake-done --skill no-template-ui -g
 pip install playwright && playwright install chromium
 ```
 
