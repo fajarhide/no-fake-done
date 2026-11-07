@@ -11,7 +11,8 @@ STATE = tempfile.mkdtemp()
 
 
 def hook(event, session="s1", **extra):
-    payload = {"hook_event_name": event, "session_id": session, "cwd": "/tmp/app", **extra}
+    payload = {"hook_event_name": event, "session_id": session, "cwd": "/tmp/app"}
+    payload.update(extra)
     out = subprocess.run([sys.executable, GATE], input=json.dumps(payload), capture_output=True, text=True,
                          env={**os.environ, "NO_BROKEN_UI_GATE_DIR": STATE})
     assert out.returncode == 0, out.stderr
@@ -57,6 +58,16 @@ assert stop("s5") == {}
 edit("/tmp/app/page.vue", "s6a")
 assert stop("s6b") == {}
 assert stop("s6a").get("decision") == "block"
+
+# The reason names the pages the edited file reaches.
+app = tempfile.mkdtemp()
+os.makedirs(os.path.join(app, "public"))
+with open(os.path.join(app, "public", "index.html"), "w") as f:
+    f.write("<link rel='stylesheet' href='/site.css'>")
+open(os.path.join(app, "public", "site.css"), "w").close()
+hook("PostToolUse", "s7", tool_name="Edit", tool_input={"file_path": os.path.join(app, "public", "site.css")})
+reason = hook("Stop", "s7", cwd=app)["reason"]
+assert "Pages they reach: /." in reason, reason
 
 # Garbage on stdin never breaks the session.
 out = subprocess.run([sys.executable, GATE], input="not json", capture_output=True, text=True,
