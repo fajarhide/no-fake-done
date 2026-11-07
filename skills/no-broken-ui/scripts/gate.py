@@ -14,6 +14,22 @@ import tempfile
 UI = re.compile(r"\.(html?|css|scss|sass|less|jsx|tsx|vue|svelte|astro|erb|hbs|njk|liquid|jinja2?|twig)$", re.I)
 
 
+def pages_hint(changed, cwd):
+    """Name the pages the changed files reach, via blast.py next to this file. Empty on any failure."""
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import blast
+        r = blast.blast([os.path.relpath(f, cwd) for f in changed], cwd)
+        routes = list(dict.fromkeys(p["route"] for p in r["pages"]))
+        if not routes:
+            return ""
+        more = f" and {len(routes) - 8} more" if len(routes) > 8 else ""
+        return (" A layout changed, so every page is affected:" if r["global"] else " Pages they reach:") + \
+            " " + ", ".join(routes[:8]) + more + "."
+    except Exception:
+        return ""
+
+
 def main():
     try:
         event = json.load(sys.stdin)
@@ -47,9 +63,9 @@ def main():
             state["blocked"] = state["dirty"]
             files = ", ".join(os.path.basename(f) for f in state["changed"][-5:])
             print(json.dumps({"decision": "block", "reason": (
-                f"no-broken-ui: UI files changed since the last probe run ({files}). Before saying done, "
-                "run scripts/probe.py on the pages they render and look at the screenshots, or say in your "
-                "reply which pages are Not verified and why.")}))
+                f"no-broken-ui: UI files changed since the last probe run ({files}).{pages_hint(state['changed'], event.get('cwd') or '.')} "
+                "Before saying done, run scripts/probe.py on those pages and look at the screenshots, or say in "
+                "your reply which pages are Not verified and why.")}))
 
     with open(path, "w") as f:
         json.dump(state, f)
