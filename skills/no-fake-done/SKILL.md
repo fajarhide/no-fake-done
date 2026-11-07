@@ -75,6 +75,8 @@ Not doing: <from the spec>.
 
 If any row is under Not verified, the message says the change is not done yet and names those rows first.
 
+Before that message, run `python scripts/receipts.py PR.md <spec file>` from the repo root and fix every FAIL: a receipt that is empty or filler, a file it names that does not exist, or a Not verified row the Not verified line leaves out.
+
 ## Red flags
 
 | Thought | Reality |

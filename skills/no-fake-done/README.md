@@ -79,6 +79,17 @@ The first line of the second screen counts what can still be done and offers the
 | Said what it did not test | Yes, everything | Reduced motion, 200% zoom, 320 px, JavaScript off, slow network, reload |
 | Time and tokens | 35 s, 50k | 6 min, 78k |
 
+## Check it outside the agent
+
+`scripts/receipts.py` reads the receipts table in a spec or PR body and fails on an empty or filler receipt ("looks fine", "TODO"), a file named in backticks that is not in the repo, or a Not verified row missing from the Not verified line. It needs only Python, so it works the same whichever agent wrote the PR, in a git hook or in CI (copy the one file into the repo for CI):
+
+```sh
+python ~/.claude/skills/no-fake-done/scripts/receipts.py PR.md docs/specs/*.md   # exit 1 on any FAIL
+python ~/.claude/skills/no-fake-done/scripts/receipts.py PR.md --strict          # Not verified rows fail too
+```
+
+It checks that each receipt is there and points at something real. It does not rerun the test or open the screenshot.
+
 ## Limits
 
 This is one build per side, and nobody judged the screenshots blind. It shows what the skill makes an agent do. It does not show by how much the skill wins. The look did not get bolder, because a screen people work in should get clearer, and `no-template-ui` says so. The skill costs time: six minutes against thirty-five seconds here, most of it spent checking.
