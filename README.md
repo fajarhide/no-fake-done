@@ -23,7 +23,7 @@ What a careful engineer does around a change, and the skill that has your agent 
 | A professional would | Without a skill, agents in our runs | The skill |
 | --- | --- | --- |
 | Write down what done means before coding | kept the plan in their heads, 2 of 2 | `no-fake-done` puts a spec on disk with a receipt named for every acceptance row |
-| Keep the change to what was asked | shipped an unrequested refactor, 2 of 2 | `no-fake-done` traces every changed line to a row and splits the rest out, though 2 of 4 runs with it still rewrote code nobody asked about |
+| Keep the change to what was asked | shipped an unrequested refactor, 2 of 2 | `no-fake-done` traces every changed line to a row and splits the rest out; 2 of 4 runs with it still rewrote code nobody asked about, and 0 of 3 in a rerun after it gained a line against that |
 | Give a new page a look of its own | produced pages marked as generic AI output, 4 of 4 | `no-template-ui` builds from what only that subject has |
 | Click through it before calling it done | said "done" about a button nobody had opened, 1 of 2 | `no-broken-ui` drives the page and forces failures, empty states and the phone |
 | Check what it feels like on a slow device | (not measured) | `no-janky-motion` measures every animation in four browser runs |

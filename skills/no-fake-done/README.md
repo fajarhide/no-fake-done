@@ -38,9 +38,11 @@ Seven agents got the same small Bun and SQLite app, the same request ("add a way
 | Rewrote the existing render function nobody asked about | 0 | 2 |
 | Minutes | 1.6 to 2.3 | 2.1 to 9.5 |
 
-The skill lost on two rows. Two runs rewrote the list renderer while adding swap buttons, and one committed an empty `index.html`, so its page was blank. That run had said plainly that it never opened the page. After this round the skill gained three lines: extend code before replacing it, fetch each changed page over HTTP when no browser can run, and on a shared machine stop only your own processes. Those lines have not been tested yet.
+The skill lost on two rows. Two runs rewrote the list renderer while adding swap buttons, and one committed an empty `index.html`, so its page was blank. That run had said plainly that it never opened the page. After this round the skill gained three lines: extend code before replacing it, fetch each changed page over HTTP when no browser can run, and on a shared machine stop only your own processes. A rerun, below, tested them.
 
 Our setup had its own fault. The ports we handed to four of the seven runs were already taken on the shared test machine, so three of them could not open a browser (one with the skill worked around it). We reran one run per side on free ports. Every run chose a request and accept flow over a direct swap, with the reason that a direct swap moves a shift its owner never agreed to.
+
+A rerun on 2026-11-07 tested those three lines: three runs with the skill as it is now, the same app and request, free ports on a remote machine, and a newer model. None rewrote the renderer. All three committed a spec and a PR with receipts, Not verified and Not doing, walked the flow in a browser, and passed their own tests at the final commit (9 or 10). We did not load each final page with `judge.py` this time, so the blank page row is not measured for these runs. Three more runs with an extra rule, list every file and function you will touch before the first edit, came out the same on every row while their diffs grew from about 230 to about 350 lines and they took twice as long, so that rule was not added.
 
 ## One brief, built twice
 
