@@ -1,0 +1,66 @@
+:root {
+  --ash: #2b2622;
+  --soil: #4a3426;
+  --cream: #f4ecdf;
+  --ember: #b5471f;
+  --ember-dark: #8f3513;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ash);
+  font: 1.125rem/1.65 Georgia, "Times New Roman", serif;
+}
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 1rem; top: 1rem; background: #fff; padding: .5rem 1rem; z-index: 2; }
+
+.top {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem 1.5rem;
+  max-width: 44rem; margin: 0 auto; padding: 1.25rem 1.25rem 0;
+}
+.brand { font-weight: 700; font-size: 1.25rem; color: var(--soil); text-decoration: none; }
+nav a { margin-left: 1.25rem; color: var(--soil); }
+
+main, footer { max-width: 44rem; margin: 0 auto; padding: 0 1.25rem; }
+
+.hero { padding: 4.5rem 0 3.5rem; }
+.kicker {
+  font: 600 .8rem/1 system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ember-dark); margin: 0 0 1.25rem;
+}
+h1 { font-size: clamp(2rem, 6vw, 3.25rem); line-height: 1.1; margin: 0 0 1.25rem; color: var(--soil); }
+.lede { font-size: 1.3rem; max-width: 34rem; margin: 0 0 2rem; }
+
+.block { padding: 2.5rem 0; border-top: 2px solid var(--soil); }
+h2 { font-size: 1.6rem; margin: 0 0 1rem; color: var(--soil); }
+p { margin: 0 0 1rem; }
+
+.cup {
+  background: var(--soil); color: var(--cream);
+  margin: 1rem -1.25rem; padding: 2.5rem 1.25rem; border-top: 0;
+}
+.cup h2 { color: var(--cream); }
+.facts { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; gap: .5rem; }
+.facts strong {
+  display: inline-block; min-width: 5rem;
+  font: 600 .8rem system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #e8b48f;
+}
+
+.btn {
+  display: inline-block; padding: .8rem 1.5rem; border-radius: 2px;
+  background: var(--ember); color: #fff; text-decoration: none;
+  font: 600 1rem system-ui, sans-serif;
+}
+.btn:hover { background: var(--ember-dark); }
+.cup .btn { background: var(--cream); color: var(--soil); }
+.cup .btn:hover { background: #fff; }
+
+a { color: var(--ember-dark); }
+a:focus-visible { outline: 3px solid var(--ember); outline-offset: 3px; }
+.cup a:focus-visible { outline-color: #e8b48f; }
+
+footer { padding-top: 2rem; padding-bottom: 3rem; font-size: .95rem; color: var(--soil); border-top: 2px solid var(--soil); }
+
+@media (min-width: 46rem) { .cup { margin-left: 0; margin-right: 0; padding: 2.5rem; border-radius: 2px; } }
