@@ -2,7 +2,7 @@
 
 Your agent says "Done, all 20 tests pass." You merge it ten minutes before the demo. The clinic owner clicks Swap and nothing happens. The tests checked the server, and nobody had opened the page.
 
-`no-fake-done` makes the agent write down what done means before it writes code, then hand back a PR where every line of that list has its proof or says Not verified.
+`no-fake-done` makes the agent write down what done means before it writes code, then hand back the work, as a PR or a plain message, where every line of that list has its proof or says Not verified.
 
 Runs a change from a one-line request to a PR, and makes every claim on the way carry proof: a test, a command and its output, a screenshot, a step someone can repeat. When the change touches a screen, it hands the look to `no-template-ui` and the check to `no-broken-ui`.
 

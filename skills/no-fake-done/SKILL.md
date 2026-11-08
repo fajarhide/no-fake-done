@@ -76,7 +76,7 @@ On a shared machine, use a port you checked is free and stop only the processes 
 
 ## 5. Ship
 
-Build the PR body and your final message from the acceptance table:
+Build your final message, and the PR body when there is a PR, from the acceptance table:
 
 ```
 <one or two lines: what changed for the person using it>
@@ -91,7 +91,9 @@ Not doing: <from the spec>.
 
 If any row is under Not verified, the message says the change is not done yet and names those rows first.
 
-Commit the work first. Then, before that message, run `python scripts/proof.py PR.md <spec file>` from the repo root (just the spec file when there is no PR) and fix every FAIL: proof that is empty or filler, a file it names that does not exist, a Not verified row the Not verified line leaves out, or a change git has not committed. If the user asked you not to commit, pass `--uncommitted-ok` and say in the message that nothing is committed.
+A PR is optional. Without one, the spec file is the record: its Proof column is filled in, and every claim of done in your message points to its row there.
+
+Commit the work first. Then, before that message, run `python scripts/proof.py <spec file>` from the repo root, adding the PR body file when there is a PR, and fix every FAIL: proof that is empty or filler, a file it names that does not exist, a Not verified row the Not verified line leaves out, or a change git has not committed. If the user asked you not to commit, pass `--uncommitted-ok` and say in the message that nothing is committed.
 
 ## Red flags
 
@@ -104,4 +106,4 @@ Commit the work first. Then, before that message, run `python scripts/proof.py P
 | "The old render function is a mess and I am in the file anyway" | Extend it. Rewriting it is a refactor. |
 | "Done and committed" | Write it after `proof.py` passes, which reads `git status` for you. Saying it is not doing it. |
 | "It is small, so it needs no proof table" | The small path skips process, never proof. The table, Not verified and the commit stay. |
-| "I'll fill in the manual check line later" | A placeholder in a PR body reads as a claim. Fill it or move the row to Not verified. |
+| "I'll fill in the manual check line later" | A placeholder in a spec or PR body reads as a claim. Fill it or move the row to Not verified. |
