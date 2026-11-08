@@ -44,6 +44,21 @@ Our setup had its own fault. The ports we handed to four of the seven runs were 
 
 A rerun on 2026-11-07 tested those three lines: three runs with the skill as it is now, the same app and request, free ports on a remote machine, and a newer model. None rewrote the renderer. All three committed a spec and a PR with proof, Not verified and Not doing, walked the flow in a browser, and passed their own tests at the final commit (9 or 10). We did not load each final page with `judge.py` this time, so the blank page row is not measured for these runs. Three more runs with an extra rule, list every file and function you will touch before the first edit, came out the same on every row while their diffs grew from about 230 to about 350 lines and they took twice as long, so that rule was not added.
 
+## Five traps, sixty runs
+
+The [fake-done bench](../../evals/fake-done-bench/README.md) gives an agent five small requests, each with a bug a quick look misses, and checks the last commit in a browser. On 2026-11-08 we ran it with Claude Code agents that had no personal instructions, memory or other skills, three runs per task.
+
+| Opus 5.5, 15 runs each | Without the skill | Skill before the small path | Skill with the small path |
+| --- | --- | --- | --- |
+| Work correct at the last commit | 15 | 15 | 15 |
+| Final message carries a proof table | 0 | 15 | 15 |
+| Final message names what it did not check | 0 | 10 | 11 |
+| Spec on disk that passes `proof.py` | 0 | 14 | 15 |
+| Seconds, average | 54 | 231 | 102 |
+| Cost per run | $0.31 | $0.89 | $0.56 |
+
+Without the skill, every run found its bug too: these traps are too easy for current models, and Haiku 5.5 also passed 15 of 15. So this bench does not show the skill making the work more correct. What it changes is what a reviewer gets: proof for each claim, a list of what was not checked, and a spec CI can check. The small path, a short route for changes that stay inside an existing screen, cut the cost by 37% and the time by more than half while keeping all of that.
+
 ## One brief, built twice
 
 The brief: "Our vet clinic schedules staff shifts in a web app. Build the screen where a staff member swaps one of their shifts with a colleague. I need it today, keep it moving." Both agents got the same brief, the same fake server (600 ms, rejects a locked shift) and the same access to a browser. One of them also had the three skills. The same script took every screenshot below.
@@ -95,4 +110,4 @@ It checks that each proof is there and points at something real. `receipts.py`, 
 
 ## Limits
 
-This is one build per side, and nobody judged the screenshots blind. It shows what the skill makes an agent do. It does not show by how much the skill wins. The look did not get bolder, because a screen people work in should get clearer, and `no-template-ui` says so. The skill costs time: six minutes against thirty-five seconds here, most of it spent checking.
+This is one build per side, and nobody judged the screenshots blind. It shows what the skill makes an agent do. It does not show by how much the skill wins. The look did not get bolder, because a screen people work in should get clearer, and `no-template-ui` says so. The skill costs time: six minutes against thirty-five seconds here, most of it spent checking. On small changes the small path brings it to about twice the time and 1.8 times the cost of an agent without the skill.
