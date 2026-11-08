@@ -7,6 +7,20 @@ description: Use when building a feature, fixing a bug or making any change that
 
 Every claim about a change carries proof: a test, a command and its output, a screenshot, a step someone can repeat. Done means every acceptance row has one. This runs a change from request to PR in five steps. A step the user has already covered, such as an approved spec, is skipped.
 
+## 0. Size the change
+
+Take the **small path** when the change fits in an existing screen or endpoint, touches a few files, and adds no new page, table, permission, payment or auth rule. Everything else, and anything the user wants reviewed closely, takes the full path below.
+
+The small path keeps what a reviewer needs and drops the rest:
+
+1. Spec: the Ask line and the Acceptance table only, three to five rows, on disk as below. Skip Screen states, and add one row for the case the data or code makes likely to break (an empty list, a value with a comma, a phone width, a reload).
+2. Look: follow the screen's existing styles. Do not load the sub-skills.
+3. Build and test as in step 3.
+4. Verify: run the project's checks, then open the changed flow once in a real browser at desktop and phone width and try that one likely case. Do not load `no-broken-ui` or force its whole table.
+5. Ship exactly as in step 5: the proof table, Not verified, Not doing, commit, then `proof.py`.
+
+If the small path finds a failure you cannot explain, switch to the full path.
+
 ## 1. Spec: write down what done means
 
 Before the first line of code, write the spec to disk, where the repo keeps specs or else `docs/specs/YYYY-MM-DD-<slug>.md`. A plan kept in your head is gone after compaction, and the user cannot correct what they never saw.
@@ -87,4 +101,5 @@ Commit the work first. Then, before that message, run `python scripts/proof.py P
 | "This refactor is small and related" | It is not in the acceptance table. Split it out. |
 | "The old render function is a mess and I am in the file anyway" | Extend it. Rewriting it is a refactor. |
 | "Done and committed" | Write it after `proof.py` passes, which reads `git status` for you. Saying it is not doing it. |
+| "It is small, so it needs no proof table" | The small path skips process, never proof. The table, Not verified and the commit stay. |
 | "I'll fill in the manual check line later" | A placeholder in a PR body reads as a claim. Fill it or move the row to Not verified. |
