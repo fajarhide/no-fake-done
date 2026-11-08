@@ -75,7 +75,7 @@ Not doing: <from the spec>.
 
 If any row is under Not verified, the message says the change is not done yet and names those rows first.
 
-Before that message, run `python scripts/receipts.py PR.md <spec file>` from the repo root and fix every FAIL: a receipt that is empty or filler, a file it names that does not exist, or a Not verified row the Not verified line leaves out.
+Commit the work first. Then, before that message, run `python scripts/receipts.py PR.md <spec file>` from the repo root (just the spec file when there is no PR) and fix every FAIL: a receipt that is empty or filler, a file it names that does not exist, a Not verified row the Not verified line leaves out, or a change git has not committed. If the user asked you not to commit, pass `--uncommitted-ok` and say in the message that nothing is committed.
 
 ## Red flags
 
@@ -86,4 +86,5 @@ Before that message, run `python scripts/receipts.py PR.md <spec file>` from the
 | "I'll keep the plan in my head" | Write the spec. It takes two minutes and survives compaction. |
 | "This refactor is small and related" | It is not in the acceptance table. Split it out. |
 | "The old render function is a mess and I am in the file anyway" | Extend it. Rewriting it is a refactor. |
+| "Done and committed" | Write it after `receipts.py` passes, which reads `git status` for you. Saying it is not doing it. |
 | "I'll fill in the manual check line later" | A placeholder in a PR body reads as a claim. Fill it or move the row to Not verified. |

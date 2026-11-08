@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """Check the receipts table in a spec or PR body before anyone calls the work done.
 
-usage: receipts.py FILE [FILE ...] [--root DIR] [--strict]
+usage: receipts.py FILE [FILE ...] [--root DIR] [--strict] [--uncommitted-ok]
 
 Reads every Markdown table with a Receipt column. A row fails when its receipt is
 empty or filler ("looks fine", "TODO", "passed"), when a file it names in backticks
 does not exist under --root (default: the current directory), or when it says Not
 verified while the file's "Not verified:" line says none. Not verified rows pass
-unless --strict. Exit 1 on any failure. Standard library only, so any agent, git
-hook or CI job can run it.
+unless --strict. When --root is in a git repo, changes git has not committed fail
+too (the FILEs themselves aside), unless --uncommitted-ok. Exit 1 on any failure.
+Standard library only, so any agent, git hook or CI job can run it.
 """
 import os
 import re
+import subprocess
 import sys
 
 FILLER = re.compile(r"^(-+|n/?a|none|tbd|todo|later|ok|done|pass(ed)?|works|yes|verified|checked|"
@@ -75,10 +77,25 @@ def check(path, root):
     return report, failed, unverified
 
 
+def uncommitted(root, skip):
+    """Paths git shows as changed or untracked under root, leaving out skip. Empty outside a git repo."""
+    try:
+        out = subprocess.run(["git", "-C", root, "status", "--porcelain", "--untracked-files=all", "."],
+                             capture_output=True, text=True, check=True).stdout
+        top = subprocess.run(["git", "-C", root, "rev-parse", "--show-toplevel"],
+                             capture_output=True, text=True, check=True).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        return []
+    skip = {os.path.realpath(p) for p in skip}
+    paths = [line[3:].split(" -> ")[-1].strip('"') for line in out.splitlines()]
+    return [p for p in paths if os.path.realpath(os.path.join(top, p)) not in skip]
+
+
 def main():
     args = sys.argv[1:]
     strict = "--strict" in args
-    args = [a for a in args if a != "--strict"]
+    dirty_ok = "--uncommitted-ok" in args
+    args = [a for a in args if a not in ("--strict", "--uncommitted-ok")]
     root = "."
     if "--root" in args:
         i = args.index("--root")
@@ -91,6 +108,12 @@ def main():
         report, f, u = check(path, root)
         print("\n".join(report))
         failed, unverified = failed + f, unverified + u
+    dirty = [] if dirty_ok else uncommitted(root, args)
+    if dirty:
+        failed += 1
+        more = f" and {len(dirty) - 5} more" if len(dirty) > 5 else ""
+        print(f"FAIL not committed: {', '.join(dirty[:5])}{more}. Commit them, or pass --uncommitted-ok "
+              "when the user asked you not to commit and your message says so")
     sys.exit(1 if failed or (strict and unverified) else 0)
 
 

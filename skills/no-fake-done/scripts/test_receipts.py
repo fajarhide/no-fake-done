@@ -56,4 +56,28 @@ spec = "| # | When | Then | Receipt |\n|---|---|---|---|\n| 1 | open /swap | lis
 assert run(spec, ["e2e/swap.spec.ts"])[0] == 0
 code, out = run("Done, all tests pass.\n")
 assert code == 1 and "no receipts table" in out, out
+
+# In a git repo, work nobody committed fails, except the receipts file itself.
+with tempfile.TemporaryDirectory() as root:
+    env = {**os.environ, "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.com",
+           "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.com"}
+    git = lambda *a: subprocess.run(["git", *a], cwd=root, env=env, check=True, capture_output=True)
+    os.makedirs(os.path.join(root, "lib"))
+    open(os.path.join(root, "lib/swap.test.ts"), "w").close()
+    open(os.path.join(root, "shots-swap-mobile.png"), "w").close()
+    git("init", "-q"); git("add", "-A"); git("commit", "-qm", "start")
+    with open(os.path.join(root, "PR.md"), "w") as f:
+        f.write(GOOD.replace("shots/swap-mobile.png", "shots-swap-mobile.png"))
+    check = lambda *flags: subprocess.run([sys.executable, CHECK, "PR.md", *flags], cwd=root, capture_output=True, text=True)
+    out = check()
+    assert out.returncode == 0, out.stdout
+    with open(os.path.join(root, "lib/swap.test.ts"), "w") as f:
+        f.write("changed")
+    open(os.path.join(root, "lib/new.ts"), "w").close()
+    out = check()
+    assert out.returncode == 1 and "not committed" in out.stdout and "lib/new.ts" in out.stdout \
+        and "lib/swap.test.ts" in out.stdout and "PR.md" not in out.stdout.split("not committed")[1], out.stdout
+    assert check("--uncommitted-ok").returncode == 0
+    git("add", "-A"); git("commit", "-qm", "work")
+    assert check().returncode == 0
 print("ok")

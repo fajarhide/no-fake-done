@@ -30,7 +30,7 @@ What a careful engineer does around a change, and the skill that has your agent 
 | Check headers and caching before launch | left 6 of 21 gaps open in one round, tied in the other | `no-leaky-app` checks every kind of response the app sends |
 | Hand the reviewer evidence, not a summary | wrote PRs with no receipts, 3 of 3 | `no-fake-done` builds the PR body from the acceptance table |
 
-Two checks keep this honest without relying on the agent's word. `skills/no-fake-done/scripts/receipts.py` fails a spec or PR body with an empty or filler receipt, or one that names a file the repo does not have, so a git hook or CI job can run it whichever agent wrote the code. In Claude Code, `no-broken-ui` also holds the first "done" after an unprobed UI change until the page is checked or named as Not verified.
+Two checks keep this honest without relying on the agent's word. `skills/no-fake-done/scripts/receipts.py` fails a spec or PR body with an empty or filler receipt, or one that names a file the repo does not have, and fails while the work is not committed, so a git hook or CI job can run it whichever agent wrote the code. In Claude Code, `no-broken-ui` also holds the first "done" after an unprobed UI change until the page is checked or named as Not verified.
 
 ## The receipts method
 
