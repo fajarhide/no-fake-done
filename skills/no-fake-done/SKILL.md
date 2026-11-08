@@ -5,7 +5,7 @@ description: Use when building a feature, fixing a bug or making any change that
 
 # no-fake-done
 
-Every claim about a change carries proof: a test, a command and its output, a screenshot, a step someone can repeat. Done means every acceptance row has one. This runs a change from request to PR in five steps. A step the user has already covered, such as an approved spec, is skipped.
+Every claim about a change carries proof: a test, a command and its output, a screenshot, a step someone can repeat. Done means every acceptance row has one. This runs a change from request to PR in five steps. A step the user has already covered, such as an approved spec, is skipped. Asked only to audit something that already exists, with no change to make, use `no-broken-ui` instead, and come back here when the user asks for the fixes or a before and after.
 
 ## 0. Size the change
 
@@ -69,6 +69,8 @@ Run the project's own checks (tests, typecheck, lint, build) and keep their real
 If a screen changed, open it in a real browser. Unit tests and a clean build say nothing about a dialog. REQUIRED SUB-SKILL `no-broken-ui`: probe the changed pages, walk the changed flow, and force every row of its table that applies to the change. Each Screen states row ends with a screenshot or a walk step.
 
 When no browser can run, still request each changed page over HTTP and check it returns the content you expect, since an empty or truncated file is the commonest break. A row you cannot check here (no browser, no test account, no database) goes under Not verified with the reason. It is never marked as passing.
+
+Open every file or link you hand over the way its reader will: double-clicked from disk, the published URL, the PR page. A page that passes behind a test server can still arrive unstyled when relative paths no longer resolve.
 
 On a shared machine, use a port you checked is free and stop only the processes you started, by PID.
 
