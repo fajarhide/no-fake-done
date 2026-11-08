@@ -83,11 +83,12 @@ The first line of the second screen counts what can still be done and offers the
 
 ## Check it outside the agent
 
-`scripts/receipts.py` reads the receipts table in a spec or PR body and fails on an empty or filler receipt ("looks fine", "TODO"), a file named in backticks that is not in the repo, or a Not verified row missing from the Not verified line. It needs only Python, so it works the same whichever agent wrote the PR, in a git hook or in CI (copy the one file into the repo for CI):
+`scripts/receipts.py` reads the receipts table in a spec or PR body and fails on an empty or filler receipt ("looks fine", "TODO"), a file named in backticks that is not in the repo, a Not verified row missing from the Not verified line, or a change git has not committed. It needs only Python, so it works the same whichever agent wrote the PR, in a git hook or in CI (copy the one file into the repo for CI):
 
 ```sh
 python ~/.claude/skills/no-fake-done/scripts/receipts.py PR.md docs/specs/*.md   # exit 1 on any FAIL
 python ~/.claude/skills/no-fake-done/scripts/receipts.py PR.md --strict          # Not verified rows fail too
+python ~/.claude/skills/no-fake-done/scripts/receipts.py PR.md --uncommitted-ok  # in a pre-commit hook, where nothing is committed yet
 ```
 
 It checks that each receipt is there and points at something real. It does not rerun the test or open the screenshot.
