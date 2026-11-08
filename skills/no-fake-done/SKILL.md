@@ -5,7 +5,7 @@ description: Use when building a feature, fixing a bug or making any change that
 
 # no-fake-done
 
-Every claim about a change carries proof: a test, a command and its output, a screenshot, a step someone can repeat. Done means every acceptance row has one. This runs a change from request to PR in five steps. A step the user has already covered, such as an approved spec, is skipped.
+Every claim about a change carries proof: a test, a command and its output, a screenshot, a step someone can repeat. Done means every acceptance row has one. This runs a change from request to PR in five steps. A step the user has already covered, such as an approved spec, is skipped. Asked only to audit something that already exists, with no change to make, use `no-broken-ui` instead, and come back here when the user asks for the fixes or a before and after.
 
 ## 0. Size the change
 
@@ -70,11 +70,13 @@ If a screen changed, open it in a real browser. Unit tests and a clean build say
 
 When no browser can run, still request each changed page over HTTP and check it returns the content you expect, since an empty or truncated file is the commonest break. A row you cannot check here (no browser, no test account, no database) goes under Not verified with the reason. It is never marked as passing.
 
+Open every file or link you hand over the way its reader will: double-clicked from disk, the published URL, the PR page. A page that passes behind a test server can still arrive unstyled when relative paths no longer resolve.
+
 On a shared machine, use a port you checked is free and stop only the processes you started, by PID.
 
 ## 5. Ship
 
-Build the PR body and your final message from the acceptance table:
+Build your final message, and the PR body when there is a PR, from the acceptance table:
 
 ```
 <one or two lines: what changed for the person using it>
@@ -89,7 +91,9 @@ Not doing: <from the spec>.
 
 If any row is under Not verified, the message says the change is not done yet and names those rows first.
 
-Commit the work first. Then, before that message, run `python scripts/proof.py PR.md <spec file>` from the repo root (just the spec file when there is no PR) and fix every FAIL: proof that is empty or filler, a file it names that does not exist, a Not verified row the Not verified line leaves out, or a change git has not committed. If the user asked you not to commit, pass `--uncommitted-ok` and say in the message that nothing is committed.
+A PR is optional. Without one, the spec file is the record: its Proof column is filled in, and every claim of done in your message points to its row there.
+
+Commit the work first. Then, before that message, run `python scripts/proof.py <spec file>` from the repo root, adding the PR body file when there is a PR, and fix every FAIL: proof that is empty or filler, a file it names that does not exist, a Not verified row the Not verified line leaves out, or a change git has not committed. If the user asked you not to commit, pass `--uncommitted-ok` and say in the message that nothing is committed.
 
 ## Red flags
 
@@ -102,4 +106,4 @@ Commit the work first. Then, before that message, run `python scripts/proof.py P
 | "The old render function is a mess and I am in the file anyway" | Extend it. Rewriting it is a refactor. |
 | "Done and committed" | Write it after `proof.py` passes, which reads `git status` for you. Saying it is not doing it. |
 | "It is small, so it needs no proof table" | The small path skips process, never proof. The table, Not verified and the commit stay. |
-| "I'll fill in the manual check line later" | A placeholder in a PR body reads as a claim. Fill it or move the row to Not verified. |
+| "I'll fill in the manual check line later" | A placeholder in a spec or PR body reads as a claim. Fill it or move the row to Not verified. |
