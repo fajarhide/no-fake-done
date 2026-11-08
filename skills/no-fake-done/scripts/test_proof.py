@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Run with: python scripts/test_receipts.py. Standard library only."""
+"""Run with: python scripts/test_proof.py. Standard library only."""
 import os
 import subprocess
 import sys
 import tempfile
 
-CHECK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "receipts.py")
+CHECK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "proof.py")
 
 
 def run(body, files=(), *flags):
@@ -21,7 +21,7 @@ def run(body, files=(), *flags):
 
 GOOD = """Swap shifts.
 
-| # | Acceptance | Receipt |
+| # | Acceptance | Proof |
 | --- | --- | --- |
 | 1 | Swap updates both shifts | `bun test lib/swap.test.ts`: 6 passed |
 | 2 | Phone layout | screenshot `shots/swap-mobile.png` |
@@ -32,11 +32,11 @@ Not verified: none.
 code, out = run(GOOD, ["lib/swap.test.ts", "shots/swap-mobile.png"])
 assert code == 0 and "2 rows" in out, out
 
-# A receipt that names a file the repo does not have.
+# A proof that names a file the repo does not have.
 code, out = run(GOOD, ["lib/swap.test.ts"])
 assert code == 1 and "shots/swap-mobile.png" in out, out
 
-# Placeholders are not receipts.
+# Placeholders are not proof.
 for filler in ("", "TODO", "looks fine", "-", "passed", "Manual check"):
     code, out = run(GOOD.replace("screenshot `shots/swap-mobile.png`", filler), ["lib/swap.test.ts"])
     assert code == 1 and "row 2" in out, (filler, out)
@@ -51,13 +51,15 @@ assert code == 1, out
 code, out = run(nv.replace("Not verified: row 2, no browser here.", "Not verified: none."), ["lib/swap.test.ts"])
 assert code == 1 and "none" in out, out
 
-# The spec's four-column table counts too, and a file with no receipts table fails.
-spec = "| # | When | Then | Receipt |\n|---|---|---|---|\n| 1 | open /swap | list shows | `e2e/swap.spec.ts` |\n"
+# The spec's four-column table counts too, and a file with no proof table fails.
+spec = "| # | When | Then | Proof |\n|---|---|---|---|\n| 1 | open /swap | list shows | `e2e/swap.spec.ts` |\n"
 assert run(spec, ["e2e/swap.spec.ts"])[0] == 0
+# Tables written before the rename, with a Receipt column, still count.
+assert run(spec.replace("Proof", "Receipt"), ["e2e/swap.spec.ts"])[0] == 0
 code, out = run("Done, all tests pass.\n")
-assert code == 1 and "no receipts table" in out, out
+assert code == 1 and "no proof table" in out, out
 
-# In a git repo, work nobody committed fails, except the receipts file itself.
+# In a git repo, work nobody committed fails, except the proof file itself.
 with tempfile.TemporaryDirectory() as root:
     env = {**os.environ, "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.com",
            "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.com"}
@@ -80,4 +82,8 @@ with tempfile.TemporaryDirectory() as root:
     assert check("--uncommitted-ok").returncode == 0
     git("add", "-A"); git("commit", "-qm", "work")
     assert check().returncode == 0
+
+# The old script name still runs the check.
+out = subprocess.run([sys.executable, CHECK.replace("proof.py", "receipts.py")], capture_output=True, text=True)
+assert out.returncode != 0 and "usage: proof.py" in out.stdout + out.stderr, out
 print("ok")

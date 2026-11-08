@@ -5,7 +5,7 @@ description: Use when building a feature, fixing a bug or making any change that
 
 # no-fake-done
 
-Every claim about a change carries a receipt: a test, a command and its output, a screenshot, a step someone can repeat. Done means every acceptance row has one. This runs a change from request to PR in five steps. A step the user has already covered, such as an approved spec, is skipped.
+Every claim about a change carries proof: a test, a command and its output, a screenshot, a step someone can repeat. Done means every acceptance row has one. This runs a change from request to PR in five steps. A step the user has already covered, such as an approved spec, is skipped.
 
 ## 1. Spec: write down what done means
 
@@ -19,7 +19,7 @@ Assumptions: <each guess that changes what gets built, one per line>
 Not doing: <what someone might expect that you are leaving out>
 
 ## Acceptance
-| # | When | Then | Receipt |
+| # | When | Then | Proof |
 | 1 | <action or input> | <observable result> | <test name, command, screenshot or walk step> |
 
 ## Screen states (only when a screen changes)
@@ -33,7 +33,7 @@ Not doing: <what someone might expect that you are leaving out>
 ```
 
 - When two designs differ in size, such as a direct swap versus a request and accept flow with a new table, write each in one line, build the smaller one that meets the ask, and put the other under Not doing. Ask the user only when the smaller one would be wrong for them, not merely less complete.
-- Every acceptance row names its receipt when you write it. "Looks fine" is not a receipt.
+- Every acceptance row names its proof when you write it. "Looks fine" is not proof.
 - Include the rules the server has to enforce: who may do it, data that changed since the page loaded, and a repeat or double submit.
 - Tell the user the smallest version, the assumptions and Not doing in a few lines, then keep going.
 
@@ -48,7 +48,7 @@ Not doing: <what someone might expect that you are leaving out>
 - Every changed line traces to an acceptance row. A cleanup you want on the way goes in a note for its own PR. If you already made one, revert it or split it out before opening the PR. Extend existing code before replacing it: rewriting a function you only needed to call is a refactor too.
 - Reuse what the repo already has before adding anything.
 
-## 4. Verify: collect the receipts
+## 4. Verify: collect the proof
 
 Run the project's own checks (tests, typecheck, lint, build) and keep their real output.
 
@@ -65,7 +65,7 @@ Build the PR body and your final message from the acceptance table:
 ```
 <one or two lines: what changed for the person using it>
 
-| # | Acceptance | Receipt |
+| # | Acceptance | Proof |
 | 1 | Swap updates both shifts | `vitest run lib/swap.test.ts`: 6 passed |
 | 5 | Phone layout | screenshot `swap-mobile.png` |
 
@@ -75,7 +75,7 @@ Not doing: <from the spec>.
 
 If any row is under Not verified, the message says the change is not done yet and names those rows first.
 
-Commit the work first. Then, before that message, run `python scripts/receipts.py PR.md <spec file>` from the repo root (just the spec file when there is no PR) and fix every FAIL: a receipt that is empty or filler, a file it names that does not exist, a Not verified row the Not verified line leaves out, or a change git has not committed. If the user asked you not to commit, pass `--uncommitted-ok` and say in the message that nothing is committed.
+Commit the work first. Then, before that message, run `python scripts/proof.py PR.md <spec file>` from the repo root (just the spec file when there is no PR) and fix every FAIL: proof that is empty or filler, a file it names that does not exist, a Not verified row the Not verified line leaves out, or a change git has not committed. If the user asked you not to commit, pass `--uncommitted-ok` and say in the message that nothing is committed.
 
 ## Red flags
 
@@ -86,5 +86,5 @@ Commit the work first. Then, before that message, run `python scripts/receipts.p
 | "I'll keep the plan in my head" | Write the spec. It takes two minutes and survives compaction. |
 | "This refactor is small and related" | It is not in the acceptance table. Split it out. |
 | "The old render function is a mess and I am in the file anyway" | Extend it. Rewriting it is a refactor. |
-| "Done and committed" | Write it after `receipts.py` passes, which reads `git status` for you. Saying it is not doing it. |
+| "Done and committed" | Write it after `proof.py` passes, which reads `git status` for you. Saying it is not doing it. |
 | "I'll fill in the manual check line later" | A placeholder in a PR body reads as a claim. Fill it or move the row to Not verified. |

@@ -15,7 +15,7 @@ hooks:
 
 # no-broken-ui
 
-Audit what the page does, not what the code suggests. Reading source finds plenty, and most of it is guesses about behaviour nobody watched. A finding here carries a receipt: something a reader can check without trusting you.
+Audit what the page does, not what the code suggests. Reading source finds plenty, and most of it is guesses about behaviour nobody watched. A finding here carries proof: something a reader can check without trusting you.
 
 ## Set up
 
@@ -40,7 +40,7 @@ It saves a mobile and a desktop screenshot of each page, and reports console err
 
 First open the full-page screenshot and write the first three things your eye lands on. If they are not the page's one job, that is a hierarchy finding.
 
-Before opening the source, drive the primary path in a real browser and write down each action and what changed. Then force what a happy path never shows, on each primary action. Start each forced case from a fresh page load, because a timer or request left over from the last attempt will land in this one and put a false cause in your receipt. Read the result again after 5 s, since a slow response looks exactly like no response.
+Before opening the source, drive the primary path in a real browser and write down each action and what changed. Then force what a happy path never shows, on each primary action. Start each forced case from a fresh page load, because a timer or request left over from the last attempt will land in this one and put a false cause in your proof. Read the result again after 5 s, since a slow response looks exactly like no response.
 
 | Force | Look for |
 | --- | --- |
@@ -80,12 +80,12 @@ Disabled controls and `aria-hidden` decoration are exempt from contrast rules. A
 Write exactly this:
 
 ```
-# UI receipts: <what was audited>
+# UI audit: <what was audited>
 Tested: <pages, viewports, actions performed>. Frame: <who, job>.
 
 ## Findings
 1. [Blocker] <what the user hits, in one line>
-   Receipt: <observed | measured | judgment>: <the action and result, the number, or the screenshot path>
+   Proof: <observed | measured | judgment>: <the action and result, the number, or the screenshot path>
    Fix: <smallest change, with file:line when you have source>
 ...
 
@@ -106,6 +106,6 @@ If the request asks how to redesign, rethink or go further, finish the report ab
 
 ## When building
 
-Before calling a UI change done, run `probe.py` on the changed pages, force the rows that apply to what changed, and take before and after screenshots from the same view. Capture the before first, since it is gone once the change lands: run the probe with `--label before`, then `--label after` to the same folder, so neither overwrites the other and their numbers can be compared. For a state behind an interaction, run the same steps on the same data on both versions. Report in the same receipt form, with the pair side by side in a table.
+Before calling a UI change done, run `probe.py` on the changed pages, force the rows that apply to what changed, and take before and after screenshots from the same view. Capture the before first, since it is gone once the change lands: run the probe with `--label before`, then `--label after` to the same folder, so neither overwrites the other and their numbers can be compared. For a state behind an interaction, run the same steps on the same data on both versions. Report in the same proof form, with the pair side by side in a table.
 
 For visual improvement, change the hierarchy and spacing before adding decoration, keep to the project's existing look, and re-run the probe, because a prettier page can still lose contrast or break on a phone. Measurements prove nothing broke. Whether it looks better is the owner's call, so show both screenshots.

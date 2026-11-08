@@ -8,9 +8,9 @@ Use this when building a new page, or when asked to make one look better and the
 
 Models reach for the category default: asked for a coffee site, they produce cream, terracotta and a serif. This pass makes each visual decision answer to something true about this subject.
 
-## 1. Name the receipt
+## 1. Name the proof
 
-Decide what would prove this screen did its job. Judge the surface, not the company: a tool's landing page and its settings screen get different receipts.
+Decide what would prove this screen did its job. Judge the surface, not the company: a tool's landing page and its settings screen get different proof.
 
 | The screen has worked when | Call it | Spend the ambition on |
 | --- | --- | --- |
@@ -19,7 +19,7 @@ Decide what would prove this screen did its job. Judge the surface, not the comp
 | A reader finds the answer and leaves | Page | Structure, line length, knowing where they are |
 | The visitor remembers the work, not the frame | Show | The work fills the screen and the interface steps back |
 
-Write the receipt in one line before anything else, such as "a nurse covers tonight's gap in two taps". Step 7 checks the page against it.
+Write the proof in one line before anything else, such as "a nurse covers tonight's gap in two taps". Step 7 checks the page against it.
 
 For a Desk screen, skip steps 3 and 4 and use the work itself as the idea:
 
@@ -113,7 +113,7 @@ python scripts/probe.py OUT_DIR URL --design DESIGN.md
 
 Open every screenshot and judge the pictures, not your code:
 
-- **The receipt from step 1:** walk it on the phone screenshot. If it fails, nothing below matters yet.
+- **The proof from step 1:** walk it on the phone screenshot. If it fails, nothing below matters yet.
 - **One second:** what did you see? "A website" means there is no focal point.
 - **Five seconds:** what is this, who is it for, what do I do next?
 - **Cover the name:** could a competitor use this page unchanged?
