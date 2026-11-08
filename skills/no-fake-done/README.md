@@ -4,7 +4,7 @@ Your agent says "Done, all 20 tests pass." You merge it ten minutes before the d
 
 `no-fake-done` makes the agent write down what done means before it writes code, then hand back a PR where every line of that list has its proof or says Not verified.
 
-Runs a change from a one-line request to a PR, and makes every claim on the way carry a receipt: a test, a command and its output, a screenshot, a step someone can repeat. When the change touches a screen, it hands the look to `no-template-ui` and the check to `no-broken-ui`.
+Runs a change from a one-line request to a PR, and makes every claim on the way carry proof: a test, a command and its output, a screenshot, a step someone can repeat. When the change touches a screen, it hands the look to `no-template-ui` and the check to `no-broken-ui`.
 
 ```sh
 npx skills add fajarhide/no-fake-done --skill no-fake-done -g
@@ -18,7 +18,7 @@ We gave agents the same two prompts with and without the skill, first to see whe
 
 | Failure seen without the skill | Runs | What the skill puts in its place |
 | --- | --- | --- |
-| The plan stays in the agent's head, with no acceptance criteria anyone can check | 2 of 2 | A spec file on disk, where every acceptance row names its receipt |
+| The plan stays in the agent's head, with no acceptance criteria anyone can check | 2 of 2 | A spec file on disk, where every acceptance row names its proof |
 | A request and accept flow, a new table and a migration, chosen silently for "I need it today" | 2 of 2 | Both designs in one line each, the smaller one built, the other listed under Not doing |
 | Empty, failure, phone and keyboard states never specified | 4 of 4 | A screen states table filled in before any code |
 | An unrequested refactor shipped in the same PR | 2 of 2 | Every changed line traces to an acceptance row, anything else is split out |
@@ -30,8 +30,8 @@ Seven agents got the same small Bun and SQLite app, the same request ("add a way
 
 | | Without the skill (3 runs) | With the skill (4 runs) |
 | --- | --- | --- |
-| Spec on disk with a receipt per row | 0 | 4 |
-| PR body with a receipts table, Not verified and Not doing | 0 | 4 |
+| Spec on disk with proof per row | 0 | 4 |
+| PR body with a proof table, Not verified and Not doing | 0 | 4 |
 | Agent walked the flow in a browser | 0 | 3 |
 | Tests at the end | 5, 5, 7 | 11, 16, 11, 12 |
 | Page renders when we load it | 3 | 3 |
@@ -42,7 +42,7 @@ The skill lost on two rows. Two runs rewrote the list renderer while adding swap
 
 Our setup had its own fault. The ports we handed to four of the seven runs were already taken on the shared test machine, so three of them could not open a browser (one with the skill worked around it). We reran one run per side on free ports. Every run chose a request and accept flow over a direct swap, with the reason that a direct swap moves a shift its owner never agreed to.
 
-A rerun on 2026-11-07 tested those three lines: three runs with the skill as it is now, the same app and request, free ports on a remote machine, and a newer model. None rewrote the renderer. All three committed a spec and a PR with receipts, Not verified and Not doing, walked the flow in a browser, and passed their own tests at the final commit (9 or 10). We did not load each final page with `judge.py` this time, so the blank page row is not measured for these runs. Three more runs with an extra rule, list every file and function you will touch before the first edit, came out the same on every row while their diffs grew from about 230 to about 350 lines and they took twice as long, so that rule was not added.
+A rerun on 2026-11-07 tested those three lines: three runs with the skill as it is now, the same app and request, free ports on a remote machine, and a newer model. None rewrote the renderer. All three committed a spec and a PR with proof, Not verified and Not doing, walked the flow in a browser, and passed their own tests at the final commit (9 or 10). We did not load each final page with `judge.py` this time, so the blank page row is not measured for these runs. Three more runs with an extra rule, list every file and function you will touch before the first edit, came out the same on every row while their diffs grew from about 230 to about 350 lines and they took twice as long, so that rule was not added.
 
 ## One brief, built twice
 
@@ -83,15 +83,15 @@ The first line of the second screen counts what can still be done and offers the
 
 ## Check it outside the agent
 
-`scripts/receipts.py` reads the receipts table in a spec or PR body and fails on an empty or filler receipt ("looks fine", "TODO"), a file named in backticks that is not in the repo, a Not verified row missing from the Not verified line, or a change git has not committed. It needs only Python, so it works the same whichever agent wrote the PR, in a git hook or in CI (copy the one file into the repo for CI):
+`scripts/proof.py` reads the proof table in a spec or PR body and fails on empty or filler proof ("looks fine", "TODO"), a file named in backticks that is not in the repo, a Not verified row missing from the Not verified line, or a change git has not committed. It needs only Python, so it works the same whichever agent wrote the PR, in a git hook or in CI (copy the one file into the repo for CI):
 
 ```sh
-python ~/.claude/skills/no-fake-done/scripts/receipts.py PR.md docs/specs/*.md   # exit 1 on any FAIL
-python ~/.claude/skills/no-fake-done/scripts/receipts.py PR.md --strict          # Not verified rows fail too
-python ~/.claude/skills/no-fake-done/scripts/receipts.py PR.md --uncommitted-ok  # in a pre-commit hook, where nothing is committed yet
+python ~/.claude/skills/no-fake-done/scripts/proof.py PR.md docs/specs/*.md   # exit 1 on any FAIL
+python ~/.claude/skills/no-fake-done/scripts/proof.py PR.md --strict             # Not verified rows fail too
+python ~/.claude/skills/no-fake-done/scripts/proof.py PR.md --uncommitted-ok  # in a pre-commit hook, where nothing is committed yet
 ```
 
-It checks that each receipt is there and points at something real. It does not rerun the test or open the screenshot.
+It checks that each proof is there and points at something real. `receipts.py`, its old name, still runs it. It does not rerun the test or open the screenshot.
 
 ## Limits
 

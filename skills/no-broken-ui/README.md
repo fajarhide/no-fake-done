@@ -4,7 +4,7 @@ The screenshot looks finished. Then a customer double-clicks Pay and is charged 
 
 `no-broken-ui` makes the agent use the page the way people do, force what the happy path hides, and report only what it saw happen.
 
-A UI and UX audit skill for AI coding agents. The agent opens your app in a real browser, tries to break it, and reports what it found. Every finding carries a receipt: the action it performed, a number it measured, or a judgment labelled as one.
+A UI and UX audit skill for AI coding agents. The agent opens your app in a real browser, tries to break it, and reports what it found. Every finding carries proof: the action it performed, a number it measured, or a judgment labelled as one.
 
 ```sh
 npx skills add fajarhide/no-fake-done --skill no-broken-ui -g
@@ -29,7 +29,7 @@ Up to ten findings, ranked by what they cost the user. This is the top of a real
 ```
 1. [Blocker] Checkout shows Rp 95.000 as the order total, but the order is
    recorded as "Paid Rp 120.000 (includes Rp 25.000 shipping)".
-   Receipt: observed: checkout.html shows `Order total: Rp 95.000`. After Pay,
+   Proof: observed: checkout.html shows `Order total: Rp 95.000`. After Pay,
    the order list reads "Paid Rp 120.000 (includes Rp 25.000 shipping)".
    Fix: show subtotal, shipping and the real total before the Pay button, and
    put the same total on the button ("Pay Rp 120.000").

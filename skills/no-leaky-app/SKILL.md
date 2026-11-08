@@ -5,11 +5,11 @@ description: Use when hardening a web app you own before launch, reviewing its s
 
 # no-leaky-app
 
-Check the responses your app sends, not the code that is supposed to produce them. A header added in one route handler is missing from the 404 page, and a policy that looks strict can still allow inline scripts. Every claim carries a receipt: the response, its headers, and what changed. Work only on an app you own or are authorised to change.
+Check the responses your app sends, not the code that is supposed to produce them. A header added in one route handler is missing from the 404 page, and a policy that looks strict can still allow inline scripts. Every claim carries proof: the response, its headers, and what changed. Work only on an app you own or are authorised to change.
 
 ## 1. Collect one of each response
 
-Run the app and request one of each: a page, a 404, an error page, a static file, an API response that carries account data, and a redirect if there is one. Save the headers of each (`curl -s -D - -o /dev/null URL`). These are the before receipts.
+Run the app and request one of each: a page, a 404, an error page, a static file, an API response that carries account data, and a redirect if there is one. Save the headers of each (`curl -s -D - -o /dev/null URL`). This is the before proof.
 
 ## 2. Check every response against this table
 
@@ -32,7 +32,7 @@ Set headers in the single wrapper every response passes through, so a new route 
 
 ## 4. Prove it
 
-Request the same responses again and put their headers next to the before receipts. Write REPORT.md:
+Request the same responses again and put their headers next to the before proof. Write REPORT.md:
 
 ```
 | Response | Before | After |

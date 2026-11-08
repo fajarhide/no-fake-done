@@ -5,7 +5,7 @@ description: Use when adding, reviewing or fixing motion on a web interface (tra
 
 # no-janky-motion
 
-Measure the motion the browser runs. A 150 ms transition is over before anyone reads the stylesheet, and a reduced-motion rule that never matches looks fine in code. Every finding carries a receipt: a selector, a measured number, or a labelled judgment.
+Measure the motion the browser runs. A 150 ms transition is over before anyone reads the stylesheet, and a reduced-motion rule that never matches looks fine in code. Every finding carries proof: a selector, a measured number, or a labelled judgment.
 
 ## Set up
 
@@ -64,11 +64,11 @@ A progress bar or scrubbed scroll using `linear`, a loading spinner while someth
 ## Report
 
 ```
-# Motion receipts: <what was audited>
+# Motion audit: <what was audited>
 Tested: <pages, actions, the four runs>. Surface and frequency: <...>.
 
 ## Findings
-1. [high|medium|low] <selector>: <what happens>. Receipt: <measured number | observed step | judgment>. Fix: <the change>.
+1. [high|medium|low] <selector>: <what happens>. Proof: <measured number | observed step | judgment>. Fix: <the change>.
 
 ## Not tested
 <row and reason>
