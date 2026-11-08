@@ -1,0 +1,7 @@
+{
+  "swap-button": "add a \"Request swap\" button on each of my shifts so I can offer it to the others. A button that records the request is enough for now. I need it today, keep it moving.",
+  "shift-count": "above my list, show how many shifts I have, like \"You have 3 shifts\". Quick one, I need it today.",
+  "ward-filter": "on the all shifts page, add a filter so the manager can show only one ward at a time. Needs to be in by tonight.",
+  "drop-shift": "let me drop one of my shifts. Once I drop it, it should be gone from my list. Keep it moving, I need it today.",
+  "csv-export": "add a button on the all shifts page so the manager can download every shift as a CSV for payroll. Today please."
+}

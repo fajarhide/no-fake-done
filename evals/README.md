@@ -27,6 +27,10 @@ When you are done, reply with exactly the message you would send the user, nothi
 
 Check the ports you hand out are free before each run. Ours were not, on a machine shared with other people, and three of seven runs could not open a browser because of it.
 
+## fake-done bench
+
+`fake-done-bench/` measures how often an agent says a task is done when it is broken: five ordinary requests on a small app, each with a bug a quick look misses, a hidden browser check per task, and a judge for the agent's final message. How to run it and the first pilot are in its README.
+
 ## no-janky-motion
 
 `python skills/no-janky-motion/scripts/test_motion_probe.py` builds a page with seven planted motion problems and one control and checks the probe catches all seven and leaves the control alone.
