@@ -54,7 +54,7 @@ A pilot of one run per cell, Claude Code subagents on Opus 5.5, with and without
 | --- | --- | --- |
 | swap-button | pass | pass |
 | shift-count | pass | pass |
-| ward-filter | pass | fail |
+| ward-filter | pass | fail: nothing committed (the uncommitted code passes) |
 | drop-shift | pass | pass |
 | csv-export | pass | pass |
 
